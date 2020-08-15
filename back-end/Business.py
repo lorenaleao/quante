@@ -12,18 +12,18 @@ class BusinessBase():
         else:
             return self._type.convert(obj)
     
-    def add(self, obj):
+    def post(self, obj):
         obj = self.convert(obj)
-        obj = self.collection.add(obj.__dict__)
+        obj = self.collection.post(obj.__dict__)
         return self.convert(obj)
         
     def get(self, _id):
         obj = self.collection.get(_id)
         return self.convert(obj)
 
-    def update(self, obj):
+    def put(self, obj):
         obj = self.convert(obj)
-        obj = self.collection.update(obj.__dict__)
+        obj = self.collection.put(obj.__dict__)
         return self.convert(obj)
     
     def delete(self, _id):

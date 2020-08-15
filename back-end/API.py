@@ -15,6 +15,26 @@ def convert(obj):
 def it_works():
     return "It works! :)", 200
 
+@app.route("/client/post/", methods=["POST"])
+def post_client():
+    try:
+        data = request.get_json()
+        client = _clientBusiness.post(data)
+        return convert(client), 201
+    except Exception as e:
+        logging.error(f"Local: API post_client\nException: {e}")
+        return "Internal Server Error", 500
+
+@app.route("/client/put/", methods=["PUT"])
+def put_client():
+    try:
+        data = request.get_json()
+        client = _clientBusiness.put(data)
+        return convert(client), 200
+    except Exception as e:
+        logging.error(f"Local: API put_client\nException: {e}")
+        return "Internal Server Error", 500
+
 @app.route("/client/get/<string:id_client>", methods=["GET"])
 def get_client(id_client):
     try:
@@ -24,14 +44,13 @@ def get_client(id_client):
         logging.error(f"Local: API get_client\nException: {e}")
         return "Internal Server Error", 500
 
-@app.route("/client/post/", methods=["POST"])
-def post_client():
+@app.route("/client/delete/<string:id_client>", methods=["DELETE"])
+def delete_client(id_client):
     try:
-        data = request.get_json()
-        client = _clientBusiness.add(data)
-        return convert(client), 201
+        client = _clientBusiness.delete(id_client)
+        return convert(client), 200
     except Exception as e:
-        logging.error(f"Local: API post_client\nException: {e}")
+        logging.error(f"Local: API delete_client\nException: {e}")
         return "Internal Server Error", 500
 
 if __name__ == "__main__":

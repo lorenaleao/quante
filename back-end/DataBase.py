@@ -13,7 +13,7 @@ class Collection():
             self.mongo_url = f"mongodb+srv://quante:{password}@db-quante.dni24.gcp.mongodb.net/{login}?retryWrites=true&w=majority"
             self._type = _type
 
-    def add(self, obj):
+    def post(self, obj):
         del obj["_id"] 
         with mg.MongoClient(self.mongo_url) as db_mongo:
             collection = db_mongo["db-quante"][self._type.__name__]
@@ -27,12 +27,12 @@ class Collection():
             obj = collection.find_one({"_id" : ObjectId(_id)})
             return obj
 
-    def update(self, obj):
+    def put(self, obj):
         with mg.MongoClient(self.mongo_url) as db_mongo:
             collection = db_mongo["db-quante"][self._type.__name__]
-            ret = collection.replace_one({"_id" : ObjectId(obj["_id"])}, obj, upsert=False)
+            ret = collection.replace_one({"_id" : ObjectId(obj["_id"])}, obj, upsert=True)
             return obj if ret.matched_count > 0 else None
-   
+
     def delete(self, _id):
         obj = self.get(_id)
         with mg.MongoClient(self.mongo_url) as db_mongo:
