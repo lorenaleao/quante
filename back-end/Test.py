@@ -1,4 +1,5 @@
-from DataBase import Collection
+from Objects import Client
 import typing
 
-db = Collection(typing.Dict)
+print(Client(name = "Raphael", age = 10).__dict__)
+
