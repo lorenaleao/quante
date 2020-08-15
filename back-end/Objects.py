@@ -18,4 +18,15 @@ class Client(IObject):
         
     @staticmethod
     def convert(obj):
-        pass
+        if isinstance(obj, Client):
+            return obj
+        elif isinstance(obj, dict):
+            name = obj.get("name", None)
+            age = obj.get("age", None)
+            _id = obj.get("_id", None)
+            email = obj.get("email", None)
+            password = obj.get("password", None)
+            create_date = obj.get("create_date", None)
+            return Client(name, age, _id, email, password, create_date)        
+        else:
+            raise TypeError(f"Type '{obj.__class__.__name__}' must be a Dict or Client.")
