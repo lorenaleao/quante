@@ -20,3 +20,9 @@ class Collection():
             ret = collection.insert_one(obj)
             obj["_id"] = ObjectId(ret.inserted_id)
             return obj
+
+    def get(self, _id):
+        with mg.MongoClient(self.mongo_url) as db_mongo:
+            collection = db_mongo["db-quante"][self._type.__name__]
+            obj = collection.find_one({"_id" : ObjectId(_id)})
+            return obj
