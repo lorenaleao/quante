@@ -1,6 +1,7 @@
 import Objects as orm
 
-toDict = lambda obj : obj.__dict__
+def toDict(obj):
+    return obj.__dict__
 
 def toClient(obj):
     if isinstance(obj, orm.Client):
