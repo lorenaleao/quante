@@ -26,5 +26,15 @@ def get_client(id_client):
         logging.error(f"Local: API get_client\nException: {e}")
         return "Internal Server Error", 500
 
+@app.route("/client/post/", methods=["POST"])
+def post_client():
+    try:
+        data = request.get_json()
+        client = _clientBusiness.add(data)
+        return convert(client), 201
+    except Exception as e:
+        logging.error(f"Local: API post_client\nException: {e}")
+        return "Internal Server Error", 500
+
 if __name__ == "__main__":
     app.run(debug = True)
