@@ -43,12 +43,12 @@ class CollectionBase():
         with mg.MongoClient(self.mongo_url) as db_mongo:
             collection = db_mongo["db-quante"][self._type_.__name__]
             ret = collection.delete_one({"_id" : ObjectId(_id)})
-            return obj if ret.deleted_count == 0 else None
+            return obj 
         
 class ClientCollection(CollectionBase):
     def __init__(self):
         super().__init__(Client)
 
-class ClientCollection(CollectionBase):
+class CompanyCollection(CollectionBase):
     def __init__(self):
         super().__init__(Company)

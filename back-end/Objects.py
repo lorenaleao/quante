@@ -44,7 +44,7 @@ class Company(IObject):
         
     @staticmethod
     def convert(obj):
-        if isinstance(obj, Client):
+        if isinstance(obj, Company):
             return obj
         elif isinstance(obj, dict):
             _id = obj.get("_id", None)
@@ -53,6 +53,6 @@ class Company(IObject):
             email = obj.get("email", None)
             password = obj.get("password", None)
             create_date = obj.get("create_date", None)
-            return Client(_id, name, cnpj, age, email, password, create_date)        
+            return Company(_id, name, cnpj, email, password, create_date)        
         else:
             raise TypeError(f"Type '{obj.__class__.__name__}' must be a Dict or Client.")
