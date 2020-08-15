@@ -1,4 +1,4 @@
-from DataBase import *
+from Collections import *
 from Objects import IObject, Client
 
 class BusinessBase():
