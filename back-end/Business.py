@@ -20,7 +20,12 @@ class BusinessBase():
     def get(self, _id):
         obj = self.collection.get(_id)
         return self.convert(obj)
-    
+
+    def update(self, obj):
+        obj = self.convert(obj)
+        obj = self.collection.update(obj.__dict__)
+        return self.convert(obj)
+
 class ClientBusiness(BusinessBase):
     def __init__(self):
         super().__init__(Client)
