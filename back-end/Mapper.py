@@ -1,9 +1,9 @@
-from Objects import *
+import Objects as orm
 
 toDict = lambda obj : obj.__dict__
 
 def toClient(obj):
-    if isinstance(obj, Client):
+    if isinstance(obj, orm.Client):
         return obj
     elif isinstance(obj, dict):
         _id = obj.get("_id", None)
@@ -13,12 +13,12 @@ def toClient(obj):
         email = obj.get("email", None)
         password = obj.get("password", None)
         create_date = obj.get("create_date", None)
-        return Client(_id, name, cpf, age, email, password, create_date)        
+        return orm.Client(_id, name, cpf, age, email, password, create_date)        
     else:
         raise TypeError(f"Type '{obj.__class__.__name__}' must be a Dict or Client.")
 
 def toCompany(obj):
-    if isinstance(obj, Company):
+    if isinstance(obj, orm.Company):
         return obj
     elif isinstance(obj, dict):
         _id = obj.get("_id", None)
@@ -27,7 +27,7 @@ def toCompany(obj):
         email = obj.get("email", None)
         password = obj.get("password", None)
         create_date = obj.get("create_date", None)
-        return Company(_id, name, cnpj, email, password, create_date)        
+        return orm.Company(_id, name, cnpj, email, password, create_date)        
     else:
         raise TypeError(f"Type '{obj.__class__.__name__}' must be a Dict or Company.")
     
