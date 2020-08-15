@@ -15,6 +15,11 @@ os.makedirs("db-login", exist_ok=True)
 _clientBusiness = ClientBusiness()
 _companyBusiness = CompanyBusiness()
 
+objects = {
+    "client" : _clientBusiness,
+    "company" : _companyBusiness
+}
+
 def convert(obj):
     return json.dumps(obj.__dict__, default = str) if obj!= None else "null"
 
@@ -22,80 +27,46 @@ def convert(obj):
 def it_works():
     return "It works! :)", 200
 
-@app.route("/client/post/", methods=["POST"])
-def post_client():
+@app.route("/<string:obj_key>/post/", methods=["POST"])
+def post(obj_key):
     try:
+        print("post", obj_key)
         data = request.get_json()
-        client = _clientBusiness.post(data)
-        return convert(client), 201
+        data = objects[obj_key].post(data)
+        return convert(data), 201
     except Exception as e:
-        logging.error(f"Local: API post_client\nException: {e}")
+        logging.error(f"Local: API post {obj_key}\nException: {e}")
         return "Internal Server Error", 500
 
-@app.route("/client/put/", methods=["PUT"])
-def put_client():
+@app.route("/<string:obj_key>/put/", methods=["PUT"])
+def put(obj_key):
     try:
+        print("put", obj_key)
         data = request.get_json()
-        client = _clientBusiness.put(data)
-        return convert(client), 200
+        data = objects[obj_key].put(data)
+        return convert(data), 200
     except Exception as e:
-        logging.error(f"Local: API put_client\nException: {e}")
+        logging.error(f"Local: API put {obj_key}\nException: {e}")
         return "Internal Server Error", 500
 
-@app.route("/client/get/<string:id_client>", methods=["GET"])
-def get_client(id_client):
+@app.route("/<string:obj_key>/get/<string:_id>", methods=["GET"])
+def get(obj_key, _id):
     try:
-        client = _clientBusiness.get(id_client) 
-        return convert(client), 200
+        print("get", obj_key, _id)
+        data = objects[obj_key].get(_id)
+        return convert(data), 200
     except Exception as e:
-        logging.error(f"Local: API get_client\nException: {e}")
+        logging.error(f"Local: API get {obj_key} id: {_id} \nException: {e}")
         return "Internal Server Error", 500
 
-@app.route("/client/delete/<string:id_client>", methods=["DELETE"])
-def delete_client(id_client):
+@app.route("/<string:obj_key>/delete/<string:_id>", methods=["DELETE"])
+def delete(obj_key, _id):
     try:
-        client = _clientBusiness.delete(id_client)
-        return convert(client), 200
+        print("delete", obj_key, _id)
+        data = objects[obj_key].delete(_id)
+        return convert(data), 200
     except Exception as e:
-        logging.error(f"Local: API delete_client\nException: {e}")
-        return "Internal Server Error", 500
-
-@app.route("/company/post/", methods=["POST"])
-def post_company():
-    try:
-        data = request.get_json()
-        company = _companyBusiness.post(data)
-        return convert(company), 201
-    except Exception as e:
-        logging.error(f"Local: API post_company\nException: {e}")
-        return "Internal Server Error", 500
-
-@app.route("/company/put/", methods=["PUT"])
-def put_company():
-    try:
-        data = request.get_json()
-        company = _companyBusiness.put(data)
-        return convert(company), 200
-    except Exception as e:
-        logging.error(f"Local: API put_company\nException: {e}")
-        return "Internal Server Error", 500
-
-@app.route("/company/get/<string:id_company>", methods=["GET"])
-def get_company(id_company):
-    try:
-        company = _companyBusiness.get(id_company) 
-        return convert(company), 200
-    except Exception as e:
-        logging.error(f"Local: API get_company\nException: {e}")
-        return "Internal Server Error", 500
-
-@app.route("/company/delete/<string:id_company>", methods=["DELETE"])
-def delete_company(id_company):
-    try:
-        company = _companyBusiness.delete(id_company)
-        return convert(company), 200
-    except Exception as e:
-        logging.error(f"Local: API delete_company\nException: {e}")
+        logging.error(f"Local: API delete {obj_key} id: {_id} \nException: {e}")
         return "Internal Server Error", 500
 
 if __name__ == "__main__":
