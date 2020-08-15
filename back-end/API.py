@@ -18,7 +18,7 @@ objects = {
 }
 
 def convert(obj):
-    return json.dumps(obj.__dict__, default = str) if obj!= None else "null"
+    return json.dumps(obj, default = str) if obj!= None else "null"
 
 @app.route("/")
 def it_works():

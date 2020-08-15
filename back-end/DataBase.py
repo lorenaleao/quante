@@ -1,19 +1,13 @@
-from cryptography.fernet import Fernet
+from db_login.QuanteSecrets import get_login
 from bson.objectid import ObjectId
 from Objects import *
-
 import pymongo as mg
 
 class CollectionBase():
     def __init__(self, _type_):
-        with open("db-login/key.bin", "r") as key, open("db-login/login-password.bin", "r") as login:
-            fn = Fernet(key.read())
-            encrypted = login.read()
-            bin_msg = fn.decrypt(encrypted.encode()) 
-            login_password = bin_msg.decode()
-            login, password = login_password.split(";")
-            self.mongo_url = f"mongodb+srv://quante:{password}@db-quante.dni24.gcp.mongodb.net/{login}?retryWrites=true&w=majority"
-            self._type_ = _type_
+        login, password = get_login()
+        self.mongo_url = f"mongodb+srv://quante:{password}@db-quante.dni24.gcp.mongodb.net/{login}?retryWrites=true&w=majority"
+        self._type_ = _type_
 
     def post(self, obj):
         del obj["_id"] 

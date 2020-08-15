@@ -13,21 +13,17 @@ class BusinessBase():
     
     def post(self, obj):
         obj = self.convert(obj)
-        obj = self.collection.post(obj.__dict__)
-        return self.convert(obj)
+        return self.collection.post(obj.__dict__)
         
     def get(self, _id):
-        obj = self.collection.get(_id)
-        return self.convert(obj)
+        return self.collection.get(_id)
 
     def put(self, obj):
         obj = self.convert(obj)
-        obj = self.collection.put(obj.__dict__)
-        return self.convert(obj)
+        return self.collection.put(obj.__dict__)
     
     def delete(self, _id):
-        obj = self.collection.delete(_id)
-        return self.convert(obj)
+        return self.collection.delete(_id)
 
 class ClientBusiness(BusinessBase):
     def __init__(self):
