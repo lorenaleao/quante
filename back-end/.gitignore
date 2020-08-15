@@ -1,2 +1,3 @@
 db-login/*
 *.pyc
+log/*
