@@ -1,4 +1,4 @@
-from DataBase import ClientCollection
+from DataBase import *
 from Objects import IObject, Client
 
 class BusinessBase():
@@ -32,3 +32,7 @@ class BusinessBase():
 class ClientBusiness(BusinessBase):
     def __init__(self):
         super().__init__(ClientCollection)
+
+class CompanyBusiness(BusinessBase):
+    def __init__(self):
+        super().__init__(CompanyCollection)

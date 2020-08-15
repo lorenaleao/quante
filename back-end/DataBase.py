@@ -1,6 +1,6 @@
 from cryptography.fernet import Fernet
 from bson.objectid import ObjectId
-from Objects import Client
+from Objects import *
 
 import pymongo as mg
 
@@ -48,3 +48,7 @@ class CollectionBase():
 class ClientCollection(CollectionBase):
     def __init__(self):
         super().__init__(Client)
+
+class ClientCollection(CollectionBase):
+    def __init__(self):
+        super().__init__(Company)
