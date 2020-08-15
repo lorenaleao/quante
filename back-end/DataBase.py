@@ -12,7 +12,7 @@ class Collection():
             login, password = login_password.split(";")
             self.mongo_url = f"mongodb+srv://quante:{password}@db-quante.dni24.gcp.mongodb.net/{login}?retryWrites=true&w=majority"
             self._type = _type
-            
+
     def add(self, obj):
         del obj["_id"] 
         with mg.MongoClient(self.mongo_url) as db_mongo:
