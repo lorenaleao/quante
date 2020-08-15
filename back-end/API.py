@@ -10,7 +10,6 @@ format = "LEVEL %(levelname)s: %(asctime)s\n%(message)s\n"
 logging.basicConfig(filename = "log/log_records.log", level = logging.ERROR, format = format)
 
 os.makedirs("log", exist_ok=True)
-os.makedirs("db-login", exist_ok=True)
 
 objects = {
     "client" : ClientBusiness(),
