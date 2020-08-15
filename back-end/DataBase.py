@@ -32,3 +32,10 @@ class Collection():
             collection = db_mongo["db-quante"][self._type.__name__]
             ret = collection.replace_one({"_id" : ObjectId(obj["_id"])}, obj, upsert=False)
             return obj if ret.matched_count > 0 else None
+   
+    def delete(self, _id):
+        obj = self.get(_id)
+        with mg.MongoClient(self.mongo_url) as db_mongo:
+            collection = db_mongo["db-quante"][self._type.__name__]
+            ret = collection.delete_one({"_id" : ObjectId(_id)})
+            return obj if ret.deleted_count > 0 else None

@@ -18,3 +18,8 @@ z = coll.update(y)
 print("-----------")
 w = coll.get(x._id)
 print(w.__dict__)
+
+print("-----------")
+w = coll.delete(x._id)
+print(w._id)
+
