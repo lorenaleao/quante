@@ -11,7 +11,6 @@ class Collection():
             login_password = bin_msg.decode()
             login, password = login_password.split(";")
             self.mongo_url = f"mongodb+srv://quante:{password}@db-quante.dni24.gcp.mongodb.net/{login}?retryWrites=true&w=majority"
-            print(self.mongo_url)
             self._type = _type
             
     def add(self, obj):
