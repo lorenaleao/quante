@@ -4,7 +4,7 @@ import typing
 
 x  = Client(name = "Raphael", age = 10)
 coll = ClientBusiness()
-coll.add(x)
+coll.post(x)
 print(x.__dict__)
 
 print("-----------")
@@ -13,7 +13,7 @@ print(y.__dict__)
 
 print("------------")
 y.name = "Marcos"
-z = coll.update(y)
+z = coll.put(y)
 
 print("-----------")
 w = coll.get(x._id)
