@@ -1,7 +1,8 @@
 from Objects import Client
-from DataBase import Collection
+from Business import ClientBusiness
 import typing
 
-x  = Client(name = "Raphael", age = 10).__dict__
-coll = Collection(Client)
+x  = Client(name = "Raphael", age = 10)
+coll = ClientBusiness()
 coll.add(x)
+print(x.__dict__)
