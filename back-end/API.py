@@ -12,12 +12,9 @@ logging.basicConfig(filename = "log/log_records.log", level = logging.ERROR, for
 os.makedirs("log", exist_ok=True)
 os.makedirs("db-login", exist_ok=True)
 
-_clientBusiness = ClientBusiness()
-_companyBusiness = CompanyBusiness()
-
 objects = {
-    "client" : _clientBusiness,
-    "company" : _companyBusiness
+    "client" : ClientBusiness(),
+    "company" : CompanyBusiness()
 }
 
 def convert(obj):
