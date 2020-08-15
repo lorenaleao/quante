@@ -30,7 +30,6 @@ def it_works():
 @app.route("/<string:obj_key>/post/", methods=["POST"])
 def post(obj_key):
     try:
-        print("post", obj_key)
         data = request.get_json()
         data = objects[obj_key].post(data)
         return convert(data), 201
@@ -41,7 +40,6 @@ def post(obj_key):
 @app.route("/<string:obj_key>/put/", methods=["PUT"])
 def put(obj_key):
     try:
-        print("put", obj_key)
         data = request.get_json()
         data = objects[obj_key].put(data)
         return convert(data), 200
@@ -52,7 +50,6 @@ def put(obj_key):
 @app.route("/<string:obj_key>/get/<string:_id>", methods=["GET"])
 def get(obj_key, _id):
     try:
-        print("get", obj_key, _id)
         data = objects[obj_key].get(_id)
         return convert(data), 200
     except Exception as e:
@@ -62,7 +59,6 @@ def get(obj_key, _id):
 @app.route("/<string:obj_key>/delete/<string:_id>", methods=["DELETE"])
 def delete(obj_key, _id):
     try:
-        print("delete", obj_key, _id)
         data = objects[obj_key].delete(_id)
         return convert(data), 200
     except Exception as e:
