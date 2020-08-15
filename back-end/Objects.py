@@ -1,5 +1,5 @@
 from datetime import datetime as dt
-import MapObj as mp
+import Mapper as mp
 import abc
 
 class IObject(metaclass = abc.ABCMeta):

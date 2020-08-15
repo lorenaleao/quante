@@ -1,5 +1,7 @@
 from Objects import *
 
+toDict = lambda obj : obj.__dict__
+
 def toClient(obj):
     if isinstance(obj, Client):
         return obj
@@ -28,3 +30,4 @@ def toCompany(obj):
         return Company(_id, name, cnpj, email, password, create_date)        
     else:
         raise TypeError(f"Type '{obj.__class__.__name__}' must be a Dict or Company.")
+    
