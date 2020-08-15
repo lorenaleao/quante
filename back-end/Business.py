@@ -1,16 +1,15 @@
-from DataBase import Collection
+from DataBase import ClientCollection
 from Objects import IObject, Client
 
 class BusinessBase():
-    def __init__(self, _type : IObject):
-        self.collection = Collection(_type)
-        self._type = _type
+    def __init__(self, collection):
+        self.collection = collection()
 
     def convert(self, obj):
         if obj == None:
             return None
         else:
-            return self._type.convert(obj)
+            return self.collection._type_.convert(obj)
     
     def post(self, obj):
         obj = self.convert(obj)
@@ -29,7 +28,7 @@ class BusinessBase():
     def delete(self, _id):
         obj = self.collection.delete(_id)
         return self.convert(obj)
-    
+
 class ClientBusiness(BusinessBase):
     def __init__(self):
-        super().__init__(Client)
+        super().__init__(ClientCollection)

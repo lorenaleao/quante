@@ -22,7 +22,7 @@ r = requests.put(url, data=json.dumps(data), headers=headers)
 print(r.content, r.status_code)
 
 url = "http://localhost:5000/client/put/"
-data = {"_id" : "6f377808d3f8420986695be2", "name" : "Ilzenede", "age" : 50}
+data = {"_id" : "9f377808d3f8420986695b21", "name" : "Maçã", "age" : 50}
 headers = {'Content-type': 'application/json', 'Accept': 'text/plain'}
 r = requests.put(url, data=json.dumps(data), headers=headers)
 print(r.content, r.status_code)
