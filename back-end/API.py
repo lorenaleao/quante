@@ -10,7 +10,7 @@ os.makedirs("log", exist_ok=True)
 format = "LEVEL %(levelname)s: %(asctime)s\n%(message)s\n"
 logging.basicConfig(filename = "log/log_records.log", level = logging.ERROR, format = format)
 
-objects = {
+business = {
     "client" : ClientBusiness(),
     "company" : CompanyBusiness()
 }
@@ -22,42 +22,42 @@ def convert(obj):
 def it_works():
     return "It works! :)", 200
 
-@app.route("/<string:obj_key>/post/", methods=["POST"])
-def post(obj_key):
+@app.route("/<string:business_key>/post/", methods=["POST"])
+def post(business_key):
     try:
         data = request.get_json()
-        data = objects[obj_key].post(data)
+        data = business[business_key].post(data)
         return convert(data), 201
     except Exception as e:
-        logging.error(f"Local: API post {obj_key}\nException: {e}")
+        logging.error(f"Local: API post {business_key}\nException: {e}")
         return "Internal Server Error", 500
 
-@app.route("/<string:obj_key>/put/", methods=["PUT"])
-def put(obj_key):
+@app.route("/<string:business_key>/put/", methods=["PUT"])
+def put(business_key):
     try:
         data = request.get_json()
-        data = objects[obj_key].put(data)
+        data = business[business_key].put(data)
         return convert(data), 200
     except Exception as e:
-        logging.error(f"Local: API put {obj_key}\nException: {e}")
+        logging.error(f"Local: API put {business_key}\nException: {e}")
         return "Internal Server Error", 500
 
-@app.route("/<string:obj_key>/get/<string:_id>", methods=["GET"])
-def get(obj_key, _id):
+@app.route("/<string:business_key>/get/<string:_id>", methods=["GET"])
+def get(business_key, _id):
     try:
-        data = objects[obj_key].get(_id)
+        data = business[business_key].get(_id)
         return convert(data), 200
     except Exception as e:
-        logging.error(f"Local: API get {obj_key} id: {_id} \nException: {e}")
+        logging.error(f"Local: API get {business_key} id: {_id} \nException: {e}")
         return "Internal Server Error", 500
 
-@app.route("/<string:obj_key>/delete/<string:_id>", methods=["DELETE"])
-def delete(obj_key, _id):
+@app.route("/<string:business_key>/delete/<string:_id>", methods=["DELETE"])
+def delete(business_key, _id):
     try:
-        data = objects[obj_key].delete(_id)
+        data = business[business_key].delete(_id)
         return convert(data), 200
     except Exception as e:
-        logging.error(f"Local: API delete {obj_key} id: {_id} \nException: {e}")
+        logging.error(f"Local: API delete {business_key} id: {_id} \nException: {e}")
         return "Internal Server Error", 500
 
 if __name__ == "__main__":
