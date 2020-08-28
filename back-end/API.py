@@ -24,7 +24,6 @@ def post(key):
         data = business[key].post(data)
         return convert(data), 201
     except Exception as e:
-        logging.error(f"Local: API post {key}\nException: {e}")
         return "Internal Server Error", 500
 
 @app.route("/<string:key>/put/", methods=["PUT"])
@@ -34,7 +33,6 @@ def put(key):
         data = business[key].put(data)
         return convert(data), 200
     except Exception as e:
-        logging.error(f"Local: API put {key}\nException: {e}")
         return "Internal Server Error", 500
 
 @app.route("/<string:key>/get/<string:_id>", methods=["GET"])
@@ -43,7 +41,6 @@ def get(key, _id):
         data = business[key].get(_id)
         return convert(data), 200
     except Exception as e:
-        logging.error(f"Local: API get {key} id: {_id} \nException: {e}")
         return "Internal Server Error", 500
 
 @app.route("/<string:key>/delete/<string:_id>", methods=["DELETE"])
@@ -52,7 +49,6 @@ def delete(key, _id):
         data = business[key].delete(_id)
         return convert(data), 200
     except Exception as e:
-        logging.error(f"Local: API delete {key} id: {_id} \nException: {e}")
         return "Internal Server Error", 500
 
 if __name__ == "__main__":
