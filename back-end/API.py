@@ -1,14 +1,9 @@
 from flask import Flask, request, jsonify
 from Business import *
-import logging
 import json
 import os
 
 app = Flask(__name__)
-
-os.makedirs("log", exist_ok=True)
-format = "LEVEL %(levelname)s: %(asctime)s\n%(message)s\n"
-logging.basicConfig(filename = "log/log_records.log", level = logging.ERROR, format = format)
 
 business = {
     "client" : ClientBusiness(),
