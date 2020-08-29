@@ -1,4 +1,4 @@
-db_login/*
+secrets/*
 *.pyc
 log/*
 __pycache__/

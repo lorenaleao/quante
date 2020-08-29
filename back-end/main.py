@@ -1,9 +1,17 @@
-from flask import Flask, request, jsonify
-from Business import *
+# Standart import
 import json
 import os
 
+# Third part import
+from flask import Flask, request, jsonify
+
+# Local application imports
+from Business import *
+from Repository import ImageRepository
+
 app = Flask(__name__)
+
+_imageRepository = ImageRepository("img/")
 
 business = {
     "client" : ClientBusiness(),
@@ -31,7 +39,7 @@ def put(key):
     try:
         data = request.get_json()
         data = business[key].put(data)
-        return convert(data), 200
+        return convert(data), 201
     except Exception as e:
         return "Internal Server Error", 500
 
@@ -48,6 +56,14 @@ def delete(key, _id):
     try:
         data = business[key].delete(_id)
         return convert(data), 200
+    except Exception as e:
+        return "Internal Server Error", 500
+
+@app.route("/img/post/", methods=["POST"])
+def post_img():
+    try:
+        url = _imageRepository.save(request.files["file"])
+        return url, 201
     except Exception as e:
         return "Internal Server Error", 500
 

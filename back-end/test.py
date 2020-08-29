@@ -1,17 +1,14 @@
 import requests
 import json
-import requests
 
-#http://docs.python-requests.org/en/latest/user/quickstart/#post-a-multipart-encoded-file
-
-url = "http://localhost:5000/"
-fin = open('simple_table.pdf', 'rb')
+url = "https://handy-balancer-285321.rj.r.appspot.com/img/post/"
+fin = open('brain.jpeg', 'rb')
 files = {'file': fin}
 try:
-	r = requests.post(url, files=files)
+    print(requests.post(url, files=files).text)
 finally:
 	fin.close()
- 
+
 """
 url = "http://localhost:5000/client/post/"
 data = {"name" : "Maria", "age" : 100}
