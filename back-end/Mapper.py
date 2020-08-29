@@ -16,7 +16,7 @@ def toClient(obj):
         create_date = obj.get("create_date", None)
         return orm.Client(_id, name, cpf, age, email, password, create_date)        
     else:
-        raise TypeError(f"Type '{obj.__class__.__name__}' must be a Dict or Client.")
+        raise TypeError("Type " + obj.__class__.__name__ + " must be a Dict or Client.")
 
 def toCompany(obj):
     if isinstance(obj, orm.Company):
@@ -30,5 +30,5 @@ def toCompany(obj):
         create_date = obj.get("create_date", None)
         return orm.Company(_id, name, cnpj, email, password, create_date)        
     else:
-        raise TypeError(f"Type '{obj.__class__.__name__}' must be a Dict or Company.")
+        raise TypeError(f"Type " + obj.__class__.__name__ + " must be a Dict or Company.")
     

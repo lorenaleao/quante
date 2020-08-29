@@ -1,7 +1,7 @@
 from datetime import datetime as dt
 import Mapper as mp
 import abc
-    
+
 class IObject(metaclass = abc.ABCMeta):
     @staticmethod	    
     @abc.abstractstaticmethod	    
