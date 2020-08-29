@@ -1,6 +1,14 @@
 import requests
 import json
 
+url = "https://handy-balancer-285321.rj.r.appspot.com/img/post/"
+fin = open('brain.jpeg', 'rb')
+files = {'file': fin}
+try:
+    print(requests.post(url, files=files).text)
+finally:
+	fin.close()
+
 """
 url = "http://localhost:5000/client/post/"
 data = {"name" : "Maria", "age" : 100}

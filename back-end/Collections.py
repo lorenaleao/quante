@@ -1,12 +1,13 @@
-from db_login.QuanteSecrets import get_login
 from bson.objectid import ObjectId
 import pymongo as mg
+
+from secrets.QuanteSecrets import get_login
 import Objects as orm
 
 class CollectionBase():
     def __init__(self, _type_):
         login, password = get_login()
-        self.mongo_url = f"mongodb+srv://quante:{password}@db-quante.dni24.gcp.mongodb.net/{login}?retryWrites=true&w=majority"
+        self.mongo_url = "mongodb+srv://quante:" + password + "@db-quante.dni24.gcp.mongodb.net/" + login + "?retryWrites=true&w=majority"
         self.collection_name = _type_.__name__
         self.convert = _type_.convert
     
