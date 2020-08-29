@@ -1,8 +1,9 @@
 import requests
 import json
 
+#url = "http://127.0.0.1:5000/img/post/"
 url = "https://handy-balancer-285321.rj.r.appspot.com/img/post/"
-fin = open('brain.jpeg', 'rb')
+fin = open('himawari.png', 'rb')
 files = {'file': fin}
 try:
     print(requests.post(url, files=files).text)
