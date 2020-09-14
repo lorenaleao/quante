@@ -1,0 +1,3 @@
+back-end/secrets/*
+back-end/*.pyc
+back-end/__pycache__/
