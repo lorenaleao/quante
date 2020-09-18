@@ -7,11 +7,11 @@ from flask import Flask, request, jsonify
 
 # Local application imports
 from Business import *
-from Repository import ImageRepository
+from Repository import LocalRepository
 
 app = Flask(__name__)
 
-_imageRepository = ImageRepository("img/")
+image_repository = LocalRepository("img/")
 
 business = {
     "client" : ClientBusiness(),
@@ -62,9 +62,10 @@ def delete(key, _id):
 @app.route("/img/post/", methods=["POST"])
 def post_img():
     try:
-        url = _imageRepository.save(request.files["file"])
+        url = image_repository.save(request.files["file"])
         return url, 201
     except Exception as e:
+        print(e)
         return "Internal Server Error", 500
 
 if __name__ == "__main__":
