@@ -1,11 +1,10 @@
 # Standart import
+from typing import Union
 from datetime import datetime as dt
-import abc
 
-class IObject(metaclass = abc.ABCMeta):
+class IObject():
     @staticmethod	    
-    @abc.abstractstaticmethod	    
-    def convert(obj):	    
+    def convert(obj : Union['IObject', dict]) -> 'IObject':	    
         raise NotImplementedError
 
 class Client(IObject):
@@ -19,7 +18,7 @@ class Client(IObject):
         self.create_date = create_date
         
     @staticmethod
-    def convert(obj):
+    def convert(obj : Union['Client', dict]) -> 'Client':
         if isinstance(obj, Client):
             return obj
         elif isinstance(obj, dict):
@@ -44,7 +43,7 @@ class Company(IObject):
         self.create_date = create_date
 
     @staticmethod
-    def convert(obj):
+    def convert(obj : Union['Company', dict]) -> 'Company':
         if isinstance(obj, Company):
             return obj
         elif isinstance(obj, dict):
@@ -57,4 +56,3 @@ class Company(IObject):
             return Company(_id, name, cnpj, email, password, create_date)        
         else:
             raise TypeError(f"Type " + obj.__class__.__name__ + " must be a Dict or Company.")
-    

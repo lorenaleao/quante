@@ -1,6 +1,8 @@
+# Third part imports
 from bson.objectid import ObjectId
 import pymongo as mg
 
+# Local application imports
 from secrets.QuanteSecrets import get_login
 import Objects as orm
 
