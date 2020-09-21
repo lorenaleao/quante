@@ -3,8 +3,8 @@ from typing import Union
 from datetime import datetime as dt
 
 class IObject():
-    @staticmethod	    
-    def convert(obj : Union['IObject', dict]) -> 'IObject':	    
+    @staticmethod
+    def convert(obj : Union['IObject', dict]) -> 'IObject':
         raise NotImplementedError
 
 class Client(IObject):
@@ -56,3 +56,29 @@ class Company(IObject):
             return Company(_id, name, cnpj, email, password, create_date)        
         else:
             raise TypeError(f"Type " + obj.__class__.__name__ + " must be a Dict or Company.")
+
+class Product(IObject):
+    def __init__(self, _id, name, description, spec, categories, prices):
+        self.price_history = [] # (time, price)
+        self.reviews = [] # list of rating ids
+        self.prices = prices # given a company, a pair containing the current price and a list with requests to change
+        self._id = _id
+        self.name = name
+        self.description = description
+        self.spec = spec
+        self.categories = categories
+
+    @staticmethod
+    def convert(obj: Union['Product', dict]) -> 'Product':
+        if isinstance(obj, Product):
+            return obj
+        elif isinstance(obj, dict):
+            _id = obj.get("_id", None)
+            name = obj.get("name", None)
+            prices = obj.get("prices", None)
+            description = obj.get("description", None)
+            spec = obj.get("spec", None)
+            categories = obj.get("categories", None)
+            return Product(_id, name, description, spec, categories, prices)
+        else:
+            raise TypeError(f"Type " + obj.__class__.__name__ + " must be a Dict or Product")

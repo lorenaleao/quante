@@ -15,11 +15,12 @@ image_repository = LocalRepository("img/")
 
 business = {
     "client" : ClientBusiness(),
-    "company" : CompanyBusiness()
+    "company" : CompanyBusiness(),
+    "product": ProductBusiness()
 }
 
 def convert(obj):
-    return json.dumps(obj, default = str) if obj!= None else "null"
+    return json.dumps(obj, default = str) if obj != None else "null"
 
 @app.route("/")
 def it_works():
@@ -32,7 +33,7 @@ def post(key):
         data = business[key].post(data)
         return convert(data), 201
     except Exception as e:
-        return "Internal Server Error", 500
+        return "Internal Server Error: " + str(e), 500
 
 @app.route("/<string:key>/put/", methods=["PUT"])
 def put(key):
@@ -41,7 +42,7 @@ def put(key):
         data = business[key].put(data)
         return convert(data), 201
     except Exception as e:
-        return "Internal Server Error", 500
+        return "Internal Server Error: " + str(e), 500
 
 @app.route("/<string:key>/get/<string:_id>", methods=["GET"])
 def get(key, _id):
@@ -49,7 +50,7 @@ def get(key, _id):
         data = business[key].get(_id)
         return convert(data), 200
     except Exception as e:
-        return "Internal Server Error", 500
+        return "Internal Server Error: " + str(e), 500
 
 @app.route("/<string:key>/delete/<string:_id>", methods=["DELETE"])
 def delete(key, _id):
@@ -57,7 +58,7 @@ def delete(key, _id):
         data = business[key].delete(_id)
         return convert(data), 200
     except Exception as e:
-        return "Internal Server Error", 500
+        return "Internal Server Error: " + str(e), 500
 
 @app.route("/img/post/", methods=["POST"])
 def post_img():

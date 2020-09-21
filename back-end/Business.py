@@ -24,3 +24,7 @@ class ClientBusiness(BusinessBase):
 class CompanyBusiness(BusinessBase):
     def __init__(self):
         super().__init__(CompanyCollection)
+
+class ProductBusiness(BusinessBase):
+    def __init__(self):
+        super().__init__(ProductCollection)
