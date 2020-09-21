@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { Alert, StyleSheet, Text, Image, View, StatusBar, TouchableOpacity } from 'react-native';
 import {MaterialIcons} from '@expo/vector-icons';
+import { TextInput } from 'react-native-gesture-handler';
 
 function CadastraUsuario({navigation}){
 
@@ -9,7 +10,7 @@ function CadastraUsuario({navigation}){
   async function getUsuario(){
     //const response = await api.get('', {params: {cpf}})
     const response = {
-        data:{id: 0, name:'Cliente A', cpf: '123.456.789-10', regDate: "23/09/2020", contribuiu:'5', lastSup:"Supermercado BH", lastProd:"Yakult", pic:'https://eshendetesia.com/images/user-profile.png'}
+        data:{id: 0, name:'Cliente A', cpf: '123.456.789-10', idade: "22", email: "cliente@esseapp.com", senha: '123456', contribuiu:'5', lastSup:"Supermercado BH", lastProd:"Yakult", pic:'https://eshendetesia.com/images/user-profile.png'}
     }
     setUsr(response.data);
   }
@@ -50,11 +51,23 @@ function CadastraUsuario({navigation}){
         <Image source={{uri: usuario.pic}} style={styles.fotoPerfil} />
         <View style={styles.campoTexto}>
             <Text style={styles.textoLabel}>Nome: </Text>
-            <Text>{usuario.name}</Text>
+            <TextInput>{usuario.name}</TextInput>
+        </View>
+        <View style={styles.campoTexto}>
+            <Text style={styles.textoLabel}>Idade: </Text>
+            <TextInput>{usuario.idade}</TextInput>
         </View>
         <View style={styles.campoTexto}>
             <Text style={styles.textoLabel}>CPF: </Text>
-            <Text>{usuario.cpf}</Text>
+            <TextInput>{usuario.cpf}</TextInput>
+        </View>
+        <View style={styles.campoTexto}>
+            <Text style={styles.textoLabel}>Email: </Text>
+            <TextInput>{usuario.email}</TextInput>
+        </View>
+        <View style={styles.campoTexto}>
+            <Text style={styles.textoLabel}>Senha: </Text>
+            <TextInput secureTextEntry={true}>{usuario.senha}</TextInput>
         </View>
         <View style={styles.campoTexto}>
             <View style={styles.box}>
