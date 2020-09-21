@@ -15,6 +15,7 @@ Campo | Tipo | Descrição
 :--- | :---: | :---- |
 **_id** | ObjectId | objeto de identificação do documento gerado no momento de sua inserção na coleção |
 **name** | string | nome do produto ou serviço |
+**image** | string | endereço da imagem onde ela está armazenada |
 **description** | string | breve descrição do produto |
 **spec** | dict from string to string | a ficha técnica do produto, que pode ser utilizada para comparar produtos posteriormente|
 **categories** | list | lista de categorias às quais o produto pertence |
@@ -43,6 +44,7 @@ Campo | Tipo | Descrição
 **_id** | ObjectId | objeto de identificação do documento gerado no momento de sua inserção na coleção |
 **name** | string | nome do estabelecimento |
 **cnpj** | string | CNPJ do estabelecimento |
+**address** | string | endereço do estabelecimento
 **email** | list | e-mail de contato do estabelecimento |
 **password** | string | senha que dá ao estabelecimento acesso ao seu perfil no aplicativo |
 **create_date** | date | data na qual o perfil do estabelecimento foi criado no aplicativo |
