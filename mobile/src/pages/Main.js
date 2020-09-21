@@ -5,9 +5,13 @@ function Main({navigation}){
     return( 
     <View>
         <Button
-        title="Pesquisar Produto"
-        onPress={() => navigation.navigate('Pesquisar')}
-      />
+          title="Cadastrar Produto"
+          onPress={() => navigation.navigate('CadastrarProduto')}
+        />
+        <Button
+          title="Pesquisar Produto"
+          onPress={() => navigation.navigate('Pesquisar')}
+        />
     </View>
     );
 }
