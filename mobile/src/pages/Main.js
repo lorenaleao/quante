@@ -13,6 +13,10 @@ function Main({navigation}){
           onPress={() => navigation.navigate('Cadastrar Usuário')}
         />
         <Button
+          title="Cadastrar Estabelecimento"
+          onPress={() => navigation.navigate('Cadastrar Estabelecimento')}
+        />
+        <Button
           title="Cadastrar Produto"
           onPress={() => navigation.navigate('Cadastrar Produto')}
         />
