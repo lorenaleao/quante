@@ -58,3 +58,19 @@ class CompanyCollection(CollectionBase):
 class ProductCollection(CollectionBase):
     def __init__(self):
         super().__init__(orm.Product)
+
+class ReviewCollection(CollectionBase):
+    def __init__(self):
+        super().__init__(orm.Review)
+
+    def post(self, obj):
+        productCollection = ProductCollection()
+        product = productCollection.get(obj["product_id"])
+        obj = Review.convert(obj).__dict__
+
+        if len(product["relevant_reviews"]) < 10:
+            product["relevant_reviews"].append(obj)
+
+        productCollection.put(product)
+        return super().post(obj)
+

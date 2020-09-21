@@ -16,7 +16,8 @@ image_repository = LocalRepository("img/")
 business = {
     "client" : ClientBusiness(),
     "company" : CompanyBusiness(),
-    "product": ProductBusiness()
+    "product": ProductBusiness(),
+    "review": ReviewBusiness()
 }
 
 def convert(obj):
@@ -66,14 +67,14 @@ def post_img():
         url = image_repository.save(request.files["file"])
         return url, 201
     except Exception as e:
-        return "Internal Server Error", 500
+        return "Internal Server Error: " + str(e), 500
 
 @app.route("/img/get/<string:img_name>", methods=["GET"])
 def get_img(img_name):
     try:
         return image_repository.load(img_name), 200
     except Exception as e:
-        return "Internal Server Error", 500
+        return "Internal Server Error: " + str(e), 500
 
 if __name__ == "__main__":
     app.run(debug = True)
