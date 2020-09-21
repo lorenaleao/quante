@@ -5,8 +5,12 @@ function Main({navigation}){
     return( 
     <View>
         <Button
+          title="Login"
+          onPress={() => navigation.navigate('Login')}
+        />
+        <Button
           title="Cadastrar Produto"
-          onPress={() => navigation.navigate('CadastrarProduto')}
+          onPress={() => navigation.navigate('Cadastrar Produto')}
         />
         <Button
           title="Perfil de Usuário"
