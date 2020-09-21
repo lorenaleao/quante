@@ -1,17 +1,42 @@
 import React, { useState } from 'react';
-import { StyleSheet, Text, Image, View, StatusBar } from 'react-native';
+import { Alert, StyleSheet, Text, Image, View, StatusBar, TouchableOpacity } from 'react-native';
+import {MaterialIcons} from '@expo/vector-icons';
 
 function CadastraUsuario({navigation}){
 
   const [usuario, setUsr] = useState({});
 
-    async function getUsuario(){
-        //const response = await api.get('', {params: {cpf}})
-        const response = {
-            data:{id: 0, name:'Cliente A', cpf: '123.456.789-10', regDate: "23/09/2020", contribuiu:'5', lastSup:"Supermercado BH", lastProd:"Yakult", pic:'https://eshendetesia.com/images/user-profile.png'}
-        }
-        setUsr(response.data);
+  async function getUsuario(){
+    //const response = await api.get('', {params: {cpf}})
+    const response = {
+        data:{id: 0, name:'Cliente A', cpf: '123.456.789-10', regDate: "23/09/2020", contribuiu:'5', lastSup:"Supermercado BH", lastProd:"Yakult", pic:'https://eshendetesia.com/images/user-profile.png'}
     }
+    setUsr(response.data);
+  }
+
+  async function deleteUsuario(){
+    Alert.alert(
+      'Deletar Conta?', 'Você deseja deletar a sua conta do nosso aplicativo junto com todo o seu histórico de contribuições?',
+      [{text: 'Cancelar', onPress: () => console.log("Cancel Pressed"),},
+    {text: 'Apagar', onPress: () => {
+      //const response = await api.delete('', {params: {cpf}})
+      console.log("Apagou")
+    }}]
+  )
+    
+  }
+
+  async function logout(){
+    Alert.alert(
+      'Logout?', 'Você deseja sair da sua conta?',
+      [{text: 'Cancelar', onPress: () => console.log("Cancel Pressed"),},
+    {text: 'Logout', onPress: () => {
+      //const response = await api.delete('', {params: {cpf}})
+      console.log("Saiu")
+    }}]
+  )
+    
+  }
 
     if(JSON.stringify(usuario) === JSON.stringify({})){
       getUsuario();
@@ -42,6 +67,15 @@ function CadastraUsuario({navigation}){
               <Text>{usuario.lastProd}</Text>
             </View>
         </View>
+        <View style={styles.botoesMenu}>
+          <TouchableOpacity style={styles.deleteButton}>
+          <MaterialIcons name="delete" size={20} onPress={deleteUsuario} color={"#fff"} />
+          </TouchableOpacity>
+          <TouchableOpacity style={styles.deleteButton}>
+          <MaterialIcons name="exit-to-app" size={20} onPress={logout} color={"#fff"} />
+          </TouchableOpacity>
+        </View>
+        
         </>
     )
 
@@ -91,6 +125,25 @@ const styles = StyleSheet.create({
     top: 20,
     alignItems: 'center',
     justifyContent: 'center',
+  },
+  deleteButton: {
+    width: 50,
+    height: 50,
+    backgroundColor: '#1e5bc6',
+    borderRadius: 25,
+    justifyContent: 'center',
+    alignItems: 'center',
+    right: 10,
+    bottom: 10,
+    margin: 5
+  },
+  botoesMenu: {
+    width: 110,
+    alignSelf: 'flex-end',
+    position: 'absolute',
+    right: 10,
+    bottom: 10,
+    flexDirection: 'row',
   }
 });
 
