@@ -3,7 +3,7 @@ import {Image, View, ScrollView, SafeAreaView, Text, TextInput, TouchableOpacity
 import {MaterialIcons} from '@expo/vector-icons'
 import { set } from 'react-native-reanimated';
 
-function BuscaProduto(){
+function BuscaProduto({navigation}){
     const [produtos, setProd] = useState([]);
     const [textoBusca, setTextobusca] = useState('');
     const [selectedValue, setSelectedValue] = useState("java");
@@ -57,12 +57,12 @@ function BuscaProduto(){
                 <ScrollView contentContainerStyle={styles.containerListaProdutos} style={styles.listaProdutos} >
                     {produtos.map((prop) => {
                         return (
-                        <View key={prop.id} style={styles.itemProduto}>
+                        <TouchableOpacity key={prop.id} style={styles.itemProduto}  onPress={() => navigation.navigate('Produto', {id:prop.id})}>
                             <Image source={{uri: prop.pic}} style={styles.fotoProduto} />
                             <Text>{prop.name}</Text>
                             <Text>Preço Mín: {prop.priceMin}</Text>
                             <Text>Preço Max: {prop.priceMax}</Text>
-                        </View>
+                        </TouchableOpacity>
                         );
                     })} 
                 </ScrollView>

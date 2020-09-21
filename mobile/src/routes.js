@@ -7,6 +7,7 @@ import Main from './pages/Main';
 import BuscaProduto from './pages/Busca';
 import CadastraProduto from './pages/CadastraProduto';
 import CadastrarUsuario from './pages/PerfilUsuario';
+import Produto from './pages/Produto';
 
 const Stack = createStackNavigator();
 
@@ -31,6 +32,7 @@ function Routes() {
         <Stack.Screen name="CadastrarProduto" component={CadastraProduto} />
         <Stack.Screen name="Perfil" component={CadastrarUsuario} />
         <Stack.Screen name="Pesquisar" component={BuscaProduto} />
+        <Stack.Screen name="Produto" component={Produto} />
         </Stack.Navigator>
       </NavigationContainer>
     );
