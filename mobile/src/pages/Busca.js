@@ -8,7 +8,7 @@ function BuscaProduto(){
     const [textoBusca, setTextobusca] = useState('');
     const [selectedValue, setSelectedValue] = useState("java");
 
-    function procuraNoBanco(){
+    async function procuraNoBanco(){
         //const response = await api.get('', {params: {textoBusca}})
         const response = {
             data:[
@@ -80,7 +80,10 @@ function BuscaProduto(){
                 i++;
             while(produtos[j] > pivo)
                 j++;
-            
+            if(i <= j){
+                aux = produtos[i]
+                
+            }
         }
     }
 }
