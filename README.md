@@ -31,19 +31,19 @@ Será desenvolvido como um trabalho para a disciplina de [Engenharia de Software
 
 - [ ] **Cadastrar um produto** 
   - [ ] Criar tela do cadastro do produto - _Guilherme Miranda_
-  - [ ] Criar um método POST para inserção dos dados no banco - _Tomaz Gomes_
+  - [x] Criar um método POST para inserção dos dados no banco - _Tomaz Gomes_
   - [ ] Criar estrutura no banco para armazenar os dados do produto - _Lorena Leão_
   - [ ] Criar método para cadastrar imagens no back-end - _Raphael Augusto_
 
 - [ ] **Cadastrar estabelecimento**
   - [ ] Criar tela do cadastro do estabelecimento - _Guilherme Miranda_
-  - [ ] Criar um método POST para inserção dos dados no banco - _Raphael Augusto_
+  - [x] Criar um método POST para inserção dos dados no banco - _Raphael Augusto_
   - [ ] Criar estrutura no banco para armazenar os dados do produto - _Lorena Leão_
 
 - [ ] **Fazer pesquisa na base de dados**
   - [ ] Criar tela para pesquisa de produto - _Matheus Guilherme Veloso_
-  - [ ] Criar método GET para fazer pesquisa no banco de produto - _Tomaz Gomes_
-  - [ ] Criar método GET para fazer pesquisa de lojas - _Tomaz Gomes_
+  - [x] Criar método GET para fazer pesquisa no banco de produto - _Tomaz Gomes_
+  - [x] Criar método GET para fazer pesquisa de lojas - _Tomaz Gomes_
   - [ ] Criar método GET para fazer pesquisa por categorias - _Tomaz Gomes_
   - [ ] Criar métodos para ordenação na interface - _Matheus Guilherme Veloso_
   - [ ] Criar métodos para filtros na interface - _Matheus Guilherme Veloso_
@@ -55,7 +55,7 @@ Será desenvolvido como um trabalho para a disciplina de [Engenharia de Software
   - [ ] Criar tela de cadastro - _Guilherme Miranda_
   - [ ] Criar tela de exbir o perfil do usuário (essa tela pode ser editada e possui botão de exclusão) - _Matheus Guilherme Veloso_
   - [ ] Criar tabela dos usuários - _Lorena Leão_
-  - [ ] Criar métodos CRUD para o usuário - _Raphael Augusto_
+  - [x] Criar métodos CRUD para o usuário - _Raphael Augusto_
 
 - [ ] **Avaliar produto**
   - [ ] Criar tabela no banco que guarda as avaliações do produto - _Lorena Leão_
@@ -69,7 +69,7 @@ Será desenvolvido como um trabalho para a disciplina de [Engenharia de Software
 
 - [ ] **Avaliar Estabelecimentos**
   - [ ] Criar tela que exibe informações do estabelecimento com os campos de avaliação - _Guilherme Miranda_
-  - [ ] Criar métodos CRUD - _Tomaz Gomes_
+  - [x] Criar métodos CRUD - _Tomaz Gomes_
   - [ ] Criar estruturas no banco para armazenar as avaliações - _Lorena Leão_
 
 - [ ] **Observar o histórico das atualizações do produto**
