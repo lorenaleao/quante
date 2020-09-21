@@ -8,6 +8,7 @@ import BuscaProduto from './pages/Busca';
 import CadastraProduto from './pages/CadastraProduto';
 import PerfilUsuario from './pages/PerfilUsuario';
 import Login from './pages/Login'
+import CadastraUsuario from './pages/CadastraUsuario'
 
 const Stack = createStackNavigator();
 
@@ -30,6 +31,7 @@ function Routes() {
         }}>
         <Stack.Screen name="Quanté?" component={Main}/>
         <Stack.Screen name="Login" component={Login}/>
+        <Stack.Screen name="Cadastrar Usuário" component={CadastraUsuario}/>
         <Stack.Screen name="Cadastrar Produto" component={CadastraProduto} />
         <Stack.Screen name="Perfil" component={PerfilUsuario} />
         <Stack.Screen name="Pesquisar" component={BuscaProduto} />
