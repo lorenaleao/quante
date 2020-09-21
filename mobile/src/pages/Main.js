@@ -9,6 +9,10 @@ function Main({navigation}){
           onPress={() => navigation.navigate('CadastrarProduto')}
         />
         <Button
+          title="Perfil de Usuário"
+          onPress={() => navigation.navigate('Perfil')}
+        />
+        <Button
           title="Pesquisar Produto"
           onPress={() => navigation.navigate('Pesquisar')}
         />
