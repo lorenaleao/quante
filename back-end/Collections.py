@@ -13,7 +13,6 @@ class CollectionBase():
         self.collection_name = _type_.__name__
         self.convert = _type_.convert
 
-
     def post(self, obj):
         obj = self.convert(obj).__dict__
         obj.pop('_id', None)
@@ -51,7 +50,6 @@ class CollectionBase():
 class ClientCollection(CollectionBase):
     def __init__(self):
         super().__init__(orm.Client)
-
 
 class CompanyCollection(CollectionBase):
     def __init__(self):
