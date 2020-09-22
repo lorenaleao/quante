@@ -21,16 +21,16 @@ class CollectionBase():
             collection = db_mongo["db-quante"][self.collection_name]
             ret = collection.insert_one(obj)
             obj["_id"] = ObjectId(ret.inserted_id)
-            return obj
+            return self.convert(obj)
 
     def get(self, _id):
         with mg.MongoClient(self.mongo_url) as db_mongo:
             collection = db_mongo["db-quante"][self.collection_name]
             obj = collection.find_one({"_id" : ObjectId(_id)})
-            return obj
+            return self.convert(obj)
 
     def put(self, obj):
-        obj = self.convert(obj).__dict__
+        obj = {k: v for k, v in self.convert(obj).__dict__.items() if v is not None}
         _id = obj.pop('_id', None)
         with mg.MongoClient(self.mongo_url) as db_mongo:
             collection = db_mongo["db-quante"][self.collection_name]
@@ -39,14 +39,14 @@ class CollectionBase():
                 obj["_id"] = _id
             else:
                 obj["_id"] = ret.upserted_id
-            return obj
+            return self.convert(obj)
 
     def delete(self, _id):
         obj = self.get(_id)
         with mg.MongoClient(self.mongo_url) as db_mongo:
             collection = db_mongo["db-quante"][self.collection_name]
             collection.delete_one({"_id" : ObjectId(_id)})
-            return obj
+            return self.convert(obj)
      
      
 class ClientCollection(CollectionBase):
@@ -96,11 +96,11 @@ class ClientCollection(CollectionBase):
 
             db_mongo["db-quante"].command(cmd)
      
-    def email_already_registered(self, email):
+    def get_by_email(self, email):
         with mg.MongoClient(self.mongo_url) as db_mongo:
             collection = db_mongo["db-quante"][self.collection_name]
             obj = collection.find_one({"email" : email})
-            return obj != None
+            return self.convert(obj)
 
 
 class CompanyCollection(CollectionBase):
@@ -148,11 +148,11 @@ class CompanyCollection(CollectionBase):
 
             db_mongo["db-quante"].command(cmd)
 
-    def email_already_registered(self, email):
+    def get_by_email(self, email):
         with mg.MongoClient(self.mongo_url) as db_mongo:
             collection = db_mongo["db-quante"][self.collection_name]
             obj = collection.find_one({"email" : email})
-            return obj != None
+            return self.convert(obj)
 
 
 class ProductCollection(CollectionBase):
