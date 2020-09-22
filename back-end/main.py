@@ -81,7 +81,18 @@ def email_already_registered(email):
     try:
         val_cli = business["client"].email_already_registered(email)
         val_comp = business["company"].email_already_registered(email)
-        return convert(val_cli or val_comp), 200
+        status = convert(val_cli or val_comp) 
+        return convert(status), 200 if status else 403
+    except Exception as e:
+        return f"Internal Server Error: {e}", 500
+
+@app.route("/login/login/<string:email>/<string:password>", methods=["GET"])
+def login(email, password):
+    try:
+        data_cli = business["client"].get_by_email_password(email, password)
+        data_comp = business["company"].get_by_email_password(email, password)
+        data = convert(data_cli or data_comp) 
+        return convert(data), 200 if data != None else 403
     except Exception as e:
         return f"Internal Server Error: {e}", 500
 
