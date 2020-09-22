@@ -7,6 +7,7 @@ from flask import Flask, request, jsonify, send_file
 
 # Local application imports
 from Business import *
+from Objects import IObject
 from Repository import LocalRepository
 
 app = Flask(__name__)
@@ -20,8 +21,17 @@ business = {
     "review": ReviewBusiness()
 }
 
-def convert(obj):
-    return json.dumps(obj, default = str) if obj != None else "null"
+def convert(obj) -> str:
+    if isinstance(obj, dict) or isinstance(obj, bool):
+        return json.dumps(obj, default = str) 
+    elif isinstance(obj, IObject):
+        return json.dumps(obj.__dict__, default = str) 
+    elif isinstance(obj, str):
+        return obj        
+    elif obj == None: 
+        return "null"
+    else:
+        raise Exception(f"Object {obj} has an unknown type {type(obj)}.")
 
 @app.route("/")
 def it_works():
