@@ -6,7 +6,10 @@ import {createStackNavigator} from '@react-navigation/stack';
 import Main from './pages/Main';
 import BuscaProduto from './pages/Busca';
 import CadastraProduto from './pages/CadastraProduto';
-import CadastrarUsuario from './pages/PerfilUsuario';
+import PerfilUsuario from './pages/PerfilUsuario';
+import Login from './pages/Login'
+import CadastraUsuario from './pages/CadastraUsuario'
+import CadastraEstabelecimento from './pages/CadastraEstabelecimento'
 import Produto from './pages/Produto';
 
 const Stack = createStackNavigator();
