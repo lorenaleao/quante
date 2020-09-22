@@ -2,40 +2,33 @@
 from datetime import datetime
 import requests
 import json
-
 # Third part import
 from bson.objectid import ObjectId
-
 # Cadastro de clientes
 url = "http://localhost:5000/client/post/"
 data = {"name" : "Maria", "age" : 30, "cpf" : "000.000.000-00", "email" : "maria@email.com", "password" : "123456", "create_date" : str(datetime.now())}
 headers = {'Content-type': 'application/json', 'Accept': 'text/plain'}
 r = requests.post(url, data = json.dumps(data), headers=headers)
 print(r.content.decode(), "status: ", r.status_code) 
-
 url = "http://localhost:5000/client/post/"
 data = {"name" : "João", "age" : 40, "cpf" : "111.111.111-11", "email" : "joao@email.com", "password" : "1234556", "create_date" : str(datetime.now())}
 headers = {'Content-type': 'application/json', 'Accept': 'text/plain'}
 r = requests.post(url, data = json.dumps(data), headers=headers)
 print(r.content.decode(), "status: ", r.status_code) 
-
 # Cadastro de empresas
 url = "http://localhost:5000/company/post/"
-data = {"name" : "Boteco do Paulo", "cnpj" : "99.999.999/9999-99", "address" : "Belo Horizonte, Ouro Petro, R. Beija Flor, 345", "email" : "boteco.paulo@email.com", "password" : "123456", "create_date" : str(datetime.now())}
+data = {"name" : "Boteco do Paulo", "cnpj" : "99.999.999/9999-99", "address" : { "city" : "BH", "state" : "MG" }, "email" : "boteco.paulo@email.com", "password" : "123456", "create_date" : str(datetime.now())}
 headers = {'Content-type': 'application/json', 'Accept': 'text/plain'}
 r_boteco_paulo = requests.post(url, data = json.dumps(data), headers=headers)
 print(r_boteco_paulo.content.decode(), "status: ", r_boteco_paulo.status_code) 
 boteco_paulo = json.loads(r_boteco_paulo.text)
-
 url = "http://localhost:5000/company/post/"
-data = {"name" : "Padaria da Joana", "cnpj" : "66.666.666/6666-66", "address" : "Contagem, Vila Nova, R. José Tavares, 146", "email" : "padaria.joana@email.com", "password" : "123456", "create_date" : str(datetime.now())}
+data = {"name" : "Padaria da Joana", "cnpj" : "66.666.666/6666-66", "address" : { "city" : "BH", "state" : "MG" }, "email" : "padaria.joana@email.com", "password" : "123456", "create_date" : str(datetime.now())}
 headers = {'Content-type': 'application/json', 'Accept': 'text/plain'}
 r_padaria_joana = requests.post(url, data = json.dumps(data), headers=headers)
 print(r_padaria_joana.content.decode(), "status: ", r_padaria_joana.status_code) 
 padaria_joana = json.loads(r_padaria_joana.text)
-
 # Cadastro de Produtos  
-
 ## Produtos do Boteco do Paulo
 url = "http://localhost:5000/product/post/"
 data = {
@@ -58,7 +51,6 @@ data = {
 headers = {'Content-type': 'application/json', 'Accept': 'text/plain'}
 r = requests.post(url, data = json.dumps(data), headers=headers)
 print(r.content.decode(), "status: ", r.status_code) 
-
 url = "http://localhost:5000/product/post/"
 data = {
     "name" : "Porção de Torresmo",
@@ -78,7 +70,6 @@ data = {
 headers = {'Content-type': 'application/json', 'Accept': 'text/plain'}
 r = requests.post(url, data = json.dumps(data), headers=headers)
 print(r.content.decode(), "status: ", r.status_code) 
-
 ## Associar esses produtos a padaria da Joana
 url = "http://localhost:5000/product/post/"
 data = {
@@ -98,7 +89,6 @@ data = {
 headers = {'Content-type': 'application/json', 'Accept': 'text/plain'}
 r = requests.post(url, data = json.dumps(data), headers=headers)
 print(r.content.decode(), "status: ", r.status_code) 
-
 url = "http://localhost:5000/product/post/"
 data = {
     "name" : "Pão Francês",

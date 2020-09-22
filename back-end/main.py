@@ -106,10 +106,10 @@ def login(email, password):
     except Exception as e:
         return f"Internal Server Error: {e}", 500
 
-@app.route("/product/update_price/<string:_id>/<float:new_price>", methods=["PATCH"])
-def update_price(_id, new_price):
+@app.route("/product/update_price/<string:id_company>/<string:id_product>/<string:new_price>", methods=["GET"])
+def update_price(id_company, id_product, new_price):
     try:
-        data = business["product"].update_price(_id, new_price)
+        data = business["product"].update_price(id_company, id_product, float(new_price))
         return convert(data), 200
     except Exception as e:
         return f"Internal Server Error: {e}", 500
