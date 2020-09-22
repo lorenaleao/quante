@@ -69,8 +69,8 @@ Será desenvolvido como um trabalho para a disciplina de [Engenharia de Software
 
 - [ ] **Avaliar Estabelecimentos**
   - [ ] Criar tela que exibe informações do estabelecimento com os campos de avaliação - _Guilherme Miranda_
-  - [] Criar métodos CRUD - _Tomaz Gomes_
-  - [] Criar estruturas no banco para armazenar as avaliações - _Lorena Leão_
+  - [ ] Criar métodos CRUD - _Tomaz Gomes_
+  - [ ] Criar estruturas no banco para armazenar as avaliações - _Lorena Leão_
 
 - [ ] **Observar o histórico das atualizações do produto**
   - [ ] Criar na tela de exibição do produto a interface de exibição do histórico de atualizações do produto - _Matheus Guilherme Veloso_
