@@ -54,48 +54,47 @@ class ClientCollection(CollectionBase):
         with mg.MongoClient(self.mongo_url) as db_mongo:
             try:
                 db_mongo["db-quante"].create_collection(self.collection_name)
-                
                 print("Criando collection:", self.collection_name)
-
-                vexpr = {
-                    "$jsonSchema": {
-                        "bsonType": "object",
-                        "required": [ "name", "email", "password"],
-                        "properties": {
-                            "name": {
-                            "bsonType": "string",
-                            "description": "must be a string and is required"
-                            },
-                            "age": {
-                            "bsonType": "int",
-                            "minimum": 0,
-                            "maximum": 160,
-                            "exclusiveMaximum": False,
-                            "description": "must be an integer in [ 0, 160 ] and is not required"
-                            },
-                            "cpf": {
-                            "bsonType": "string",
-                            "description": "must be a string and is not required"
-                            },
-                            "email": {
-                            "bsonType": "string",
-                            "description": "must be a string and is required"
-                            },
-                            "password": {
-                            "bsonType": "string",
-                            "description": "must be a string and is required"
-                            }
+            except Exception:
+                print("Coleção", self.collection_name, "já existe")
+            
+            vexpr = {
+                "$jsonSchema": {
+                    "bsonType": "object",
+                    "required": [ "name", "email", "password"],
+                    "properties": {
+                        "name": {
+                        "bsonType": "string",
+                        "description": "must be a string and is required"
+                        },
+                        "age": {
+                        "bsonType": "int",
+                        "minimum": 0,
+                        "maximum": 160,
+                        "exclusiveMaximum": False,
+                        "description": "must be an integer in [ 0, 160 ] and is not required"
+                        },
+                        "cpf": {
+                        "bsonType": "string",
+                        "description": "must be a string and is not required"
+                        },
+                        "email": {
+                        "bsonType": "string",
+                        "description": "must be a string and is required"
+                        },
+                        "password": {
+                        "bsonType": "string",
+                        "description": "must be a string and is required"
                         }
                     }
                 }
+            }
 
-                cmd = OrderedDict([('collMod', self.collection_name),
-                        ('validator', vexpr),
-                        ('validationLevel', 'moderate')])
+            cmd = OrderedDict([('collMod', self.collection_name),
+                    ('validator', vexpr),
+                    ('validationLevel', 'moderate')])
 
-                db_mongo["db-quante"].command(cmd)
-            except Exception:
-                print("Coleção", self.collection_name, "já existe")
+            db_mongo["db-quante"].command(cmd)
         
 class CompanyCollection(CollectionBase):
     def __init__(self):
@@ -103,45 +102,44 @@ class CompanyCollection(CollectionBase):
         with mg.MongoClient(self.mongo_url) as db_mongo:
             try:
                 db_mongo["db-quante"].create_collection(self.collection_name)
-                
                 print("Criando collection:", self.collection_name)
-
-                vexpr = {
-                    "$jsonSchema": {
-                        "bsonType": "object",
-                        "required": [ "name", "cnpj", "address", "email", "password" ],
-                        "properties": {
-                            "name": {
-                            "bsonType": "string",
-                            "description": "must be a string and is required"
-                            },
-                            "cnpj": {
-                            "bsonType": "string",
-                            "description": "must be a string and is required"
-                            },
-                            "address": {
-                            "bsonType": "string",
-                            "description": "must be a string and is required"
-                            },
-                            "email": {
-                            "bsonType": "string",
-                            "description": "must be a string and is required"
-                            },
-                            "password": {
-                            "bsonType": "string",
-                            "description": "must be a string and is required"
-                            }
+            except Exception:
+                print("Coleção", self.collection_name, "já existe")
+            
+            vexpr = {
+                "$jsonSchema": {
+                    "bsonType": "object",
+                    "required": [ "name", "cnpj", "address", "email", "password" ],
+                    "properties": {
+                        "name": {
+                        "bsonType": "string",
+                        "description": "must be a string and is required"
+                        },
+                        "cnpj": {
+                        "bsonType": "string",
+                        "description": "must be a string and is required"
+                        },
+                        "address": {
+                        "bsonType": "string",
+                        "description": "must be a string and is required"
+                        },
+                        "email": {
+                        "bsonType": "string",
+                        "description": "must be a string and is required"
+                        },
+                        "password": {
+                        "bsonType": "string",
+                        "description": "must be a string and is required"
                         }
                     }
                 }
+            }
 
-                cmd = OrderedDict([('collMod', self.collection_name),
-                        ('validator', vexpr),
-                        ('validationLevel', 'moderate')])
+            cmd = OrderedDict([('collMod', self.collection_name),
+                    ('validator', vexpr),
+                    ('validationLevel', 'moderate')])
 
-                db_mongo["db-quante"].command(cmd)
-            except Exception:
-                print("Coleção", self.collection_name, "já existe")
+            db_mongo["db-quante"].command(cmd)
 
 class ProductCollection(CollectionBase):
     def __init__(self):
@@ -149,52 +147,51 @@ class ProductCollection(CollectionBase):
         with mg.MongoClient(self.mongo_url) as db_mongo:
             try:
                 db_mongo["db-quante"].create_collection(self.collection_name) 
-                
                 print("Criando collection:", self.collection_name)
+            except Exception:
+                print("Coleção", self.collection_name, "já existe")
 
-                vexpr = {
-                    "$jsonSchema": {
-                        "bsonType": "object",
-                        "required": [ "name", "prices" ],
-                        "properties": {
-                            "name": {
-                            "bsonType": "string",
-                            "description": "must be a string and is required"
-                            },
-                            "image": {
-                            "bsonType": "string",
-                            "description": "must be a string and is not required"
-                            },
-                            "description": {
-                            "bsonType": "string",
-                            "description": "must be a string and is not required"
-                            },
-                            "spec": {
-                            "bsonType": "object"
-                            },
-                            "categories": {
-                            "bsonType": "array"
-                            },
-                            "prices": {
-                            "bsonType": "object"
-                            },
-                            "price_history": {
-                            "bsonType": "array"
-                            },
-                            "reviews": {
-                            "bsonType": "array"
-                            }
+            vexpr = {
+                "$jsonSchema": {
+                    "bsonType": "object",
+                    "required": [ "name", "prices" ],
+                    "properties": {
+                        "name": {
+                        "bsonType": "string",
+                        "description": "must be a string and is required"
+                        },
+                        "image": {
+                        "bsonType": "string",
+                        "description": "must be a string and is not required"
+                        },
+                        "description": {
+                        "bsonType": "string",
+                        "description": "must be a string and is not required"
+                        },
+                        "spec": {
+                        "bsonType": "object"
+                        },
+                        "categories": {
+                        "bsonType": "array"
+                        },
+                        "prices": {
+                        "bsonType": "object"
+                        },
+                        "price_history": {
+                        "bsonType": "array"
+                        },
+                        "reviews": {
+                        "bsonType": "array"
                         }
                     }
                 }
+            }
 
-                cmd = OrderedDict([('collMod', self.collection_name),
-                        ('validator', vexpr),
-                        ('validationLevel', 'moderate')])
+            cmd = OrderedDict([('collMod', self.collection_name),
+                    ('validator', vexpr),
+                    ('validationLevel', 'moderate')])
 
-                db_mongo["db-quante"].command(cmd)
-            except Exception:
-                print("Coleção", self.collection_name, "já existe")
+            db_mongo["db-quante"].command(cmd)
 
 class ReviewCollection(CollectionBase):
     def __init__(self):
@@ -203,7 +200,7 @@ class ReviewCollection(CollectionBase):
     def post(self, obj):
         productCollection = ProductCollection()
         product = productCollection.get(obj["product_id"])
-        obj = Review.convert(obj).__dict__
+        obj = orm.Review.convert(obj).__dict__
 
         if len(product["relevant_reviews"]) < 10:
             product["relevant_reviews"].append(obj)
