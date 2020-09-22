@@ -33,7 +33,7 @@ Será desenvolvido como um trabalho para a disciplina de [Engenharia de Software
   - [ ] Criar tela do cadastro do produto - _Guilherme Miranda_
   - [x] Criar um método POST para inserção dos dados no banco - _Tomaz Gomes_
   - [x] Criar estrutura no banco para armazenar os dados do produto - _Lorena Leão_
-  - [ ] Criar método para cadastrar imagens no back-end - _Raphael Augusto_
+  - [x] Criar método para cadastrar imagens no back-end - _Raphael Augusto_
 
 - [ ] **Cadastrar estabelecimento**
   - [ ] Criar tela do cadastro do estabelecimento - _Guilherme Miranda_
