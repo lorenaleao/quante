@@ -95,11 +95,11 @@ class ClientCollection(CollectionBase):
 
             db_mongo["db-quante"].command(cmd)
      
-    def email_already_registered(self, email):
+    def get_by_email(self, email):
         with mg.MongoClient(self.mongo_url) as db_mongo:
             collection = db_mongo["db-quante"][self.collection_name]
             obj = collection.find_one({"email" : email})
-            return obj != None
+            return self.convert(obj)
           
 class CompanyCollection(CollectionBase):
     def __init__(self):
@@ -146,11 +146,11 @@ class CompanyCollection(CollectionBase):
 
             db_mongo["db-quante"].command(cmd)
 
-    def email_already_registered(self, email):
+    def get_by_email(self, email):
         with mg.MongoClient(self.mongo_url) as db_mongo:
             collection = db_mongo["db-quante"][self.collection_name]
             obj = collection.find_one({"email" : email})
-            return obj != None
+            return self.convert(obj)
 
 
 class ProductCollection(CollectionBase):

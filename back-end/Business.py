@@ -23,15 +23,28 @@ class ClientBusiness(BusinessBase):
         super().__init__(ClientCollection)
         
     def email_already_registered(self, email):
-        return self.collection.email_already_registered(email)
+        return self.collection.get_by_email(email) != None
 
-
+    def get_by_email_password(self, email, password):
+        client = self.collection.get_by_email(email)
+        if client is None or client.password != password:
+            return None
+        else:
+            return client
+        
 class CompanyBusiness(BusinessBase):
     def __init__(self):
         super().__init__(CompanyCollection)
 
     def email_already_registered(self, email):
-        return self.collection.email_already_registered(email)
+        return self.collection.get_by_email(email) != None
+
+    def get_by_email_password(self, email, password):
+        company = self.collection.get_by_email(email)
+        if company is None or company.password != password:
+            return None
+        else:
+            return company
 
 
 class ProductBusiness(BusinessBase):
