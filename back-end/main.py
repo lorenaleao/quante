@@ -71,6 +71,14 @@ def get_by_name(key, name):
     except Exception as e:
         return f"Internal Server Error: {e}", 500
 
+@app.route("/<string:key>/get/substr/<string:pattern>", methods=["GET"])
+def get_by_substring(key, pattern):
+    try:
+        data = business[key].get_by_substring(pattern)
+        return convert(data), 200
+    except Exception as e:
+        return f"Internal Server Error: {e}", 500
+
 @app.route("/<string:key>/list/", methods=["GET"])
 def get_list(key):
     try:
