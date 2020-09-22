@@ -1,8 +1,8 @@
-# Standart import
+# Standard imports
 import json
 import os
 
-# Third part import
+# Third party import
 from flask import Flask, request, jsonify, send_file
 
 # Local application imports
@@ -59,6 +59,22 @@ def put(key):
 def get(key, _id):
     try:
         data = business[key].get(_id)
+        return convert(data), 200
+    except Exception as e:
+        return f"Internal Server Error: {e}", 500
+
+@app.route("/<string:key>/get/name/<string:name>", methods=["GET"])
+def getByName(key, name):
+    try:
+        data = business[key].getByName(name)
+        return convert(data), 200
+    except Exception as e:
+        return f"Internal Server Error: {e}", 500
+
+@app.route("/<string:key>/list/", methods=["GET"])
+def list(key):
+    try:
+        data = business[key].list()
         return convert(data), 200
     except Exception as e:
         return f"Internal Server Error: {e}", 500

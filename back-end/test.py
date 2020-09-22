@@ -9,6 +9,7 @@ login, password = get_login()
 mongo_url = "mongodb+srv://quante:" + password + "@db-quante.dni24.gcp.mongodb.net/" + login + "?retryWrites=true&w=majority"
         
 def testProductValidateSchema():
+    print("testProductValidateSchema")
     with mg.MongoClient(mongo_url) as db_mongo:
         try:
             db_mongo["db-quante"].Product.insert_one({"x":1})
@@ -32,6 +33,7 @@ def testProductValidateSchema():
             print("OK. Expected exception: " + str(e))
 
 def testReviewValidateSchema(): 
+    print("testReviewValidateSchema")
     with mg.MongoClient(mongo_url) as db_mongo:
         try:
             db_mongo["db-quante"].Review.insert_one({"x":1})
@@ -54,6 +56,40 @@ def testReviewValidateSchema():
         except Exception as e:
             print("OK. Expected exception: " + str(e))
 
+def testCompanyValidateSchema():
+    print("testCompanyValidateSchema") 
+    with mg.MongoClient(mongo_url) as db_mongo:
+        try:
+            db_mongo["db-quante"].Company.insert_one({"x":1})
+            print("NOT good; the insert above should have failed.")
+        except Exception as e:
+            print("OK. Expected exception:" + str(e))
+
+        try:
+            okdoc = {"name": "carrefour", "cnpj": "99999999", 
+            "address": {"city": "BH", "state": "MG"}, 
+            "email": "contato@carrefour.com.br", "password": "******"}
+            db_mongo["db-quante"].Company.insert_one(okdoc)
+            print("All good.")
+        except Exception as e:
+            print("exc:" + str(e)) 
+        try:
+            okdoc = {"name": "carrefour", "cnpj": "99999999", 
+            "address": {"city": "BH", "state": "MG"}, "password": "******"}
+            db_mongo["db-quante"].Company.insert_one(okdoc)
+            print("NOT good; the insert above should have failed.")
+        except Exception as e:
+            print("OK. Expected exception: " + str(e))
+        
+        try:
+            okdoc = {"name": "carrefour", "cnpj": "99999999", 
+            "address": {"city": "BH"}, 
+            "email": "contato@carrefour.com.br", "password": "******"}
+            db_mongo["db-quante"].Company.insert_one(okdoc)
+            print("NOT good; the insert above should have failed.")
+        except Exception as e:
+            print("OK. Expected exception: " + str(e))
+
 def testInsertImage():
     url = "https://handy-balancer-285321.rj.r.appspot.com/img/post/"
     fin = open('brain.jpeg', 'rb')
@@ -66,6 +102,7 @@ def testInsertImage():
 def main():
     testProductValidateSchema()
     testReviewValidateSchema()
+    testCompanyValidateSchema()
 
 main()
 
