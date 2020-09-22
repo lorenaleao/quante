@@ -29,13 +29,13 @@ class CollectionBase():
             obj = collection.find_one({"_id" : ObjectId(_id)})
             return obj
 
-    def getByName(self, name: str):
+    def get_by_name(self, name: str):
         with mg.MongoClient(self.mongo_url) as db_mongo:
             collection = db_mongo["db-quante"][self.collection_name]
             obj = collection.find_one({"name" : name})
             return obj
 
-    def list(self):
+    def get_list(self):
         with mg.MongoClient(self.mongo_url) as db_mongo:
             collection = db_mongo["db-quante"][self.collection_name]
             objs_list = []
@@ -305,7 +305,7 @@ class ReviewCollection(CollectionBase):
 
             db_mongo["db-quante"].command(cmd)
 
-    def getByName(self, name: str):
+    def get_by_name(self, name: str):
         raise Exception("Review doesn't have a field called name")
 
     def post(self, obj):
