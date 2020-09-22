@@ -27,9 +27,9 @@ function Produto({route, navigation}){
         const response = {
             data:[
                 {review_autor:"Cliente A", review_rating:"5.0", review_text:"Compro pra minha filha toda semana, e graças a esse app eu não compro mais caro no Carrefour.", published_date:"22/09/2020", is_recommended:true, likes:5},
+                {review_autor:"Cliente A", review_rating:"5.0", review_text:"Compro pra minha filha toda semana, e graças a esse app eu não compro mais caro no Carrefour.", published_date:"22/09/2020", is_recommended:false, likes:5},
                 {review_autor:"Cliente A", review_rating:"5.0", review_text:"Compro pra minha filha toda semana, e graças a esse app eu não compro mais caro no Carrefour.", published_date:"22/09/2020", is_recommended:true, likes:5},
-                {review_autor:"Cliente A", review_rating:"5.0", review_text:"Compro pra minha filha toda semana, e graças a esse app eu não compro mais caro no Carrefour.", published_date:"22/09/2020", is_recommended:true, likes:5},
-                {review_autor:"Cliente A", review_rating:"5.0", review_text:"Compro pra minha filha toda semana, e graças a esse app eu não compro mais caro no Carrefour.", published_date:"22/09/2020", is_recommended:true, likes:5},
+                {review_autor:"Cliente A", review_rating:"5.0", review_text:"Compro pra minha filha toda semana, e graças a esse app eu não compro mais caro no Carrefour.", published_date:"22/09/2020", is_recommended:false, likes:5},
             ]
         }
         setReview(response.data);
@@ -67,21 +67,28 @@ function Produto({route, navigation}){
                 })} 
             </ScrollView>
         </SafeAreaView>
-        <Text style={styles.titulo}>Avaliações Deste Produto:</Text>
+        <View style={{backgroundColor:'white', flexDirection:'row'}}>
+            <Text style={styles.titulo}>Avaliações Deste Produto:</Text>
+            <TouchableOpacity style={styles.botaoAdicionaReview} >
+                    <Text style={{color:'white'}}>Avaliar Produto</Text>
+            </TouchableOpacity>
+        </View>       
         <SafeAreaView>
             <ScrollView style={styles.listaReviews} >
                 {reviews.length > 0 && reviews.map((prop, key) => {
                     return (
                     <View key={key} style={styles.itemReview} >
-                        
-                        <Text>{prop.review_text}</Text>
-                        <Text style={styles.rodapeReview}>Postada por {prop.review_autor}, em {prop.published_date}</Text>
-                        <View
-                            style={{
-                                borderBottomColor: 'black',
-                                borderBottomWidth: 1,
-                            }}
-                        />
+                        <View style={styles.ladoA}>
+                            {prop.is_recommended && <MaterialIcons name="thumb-up" size={20} color={"green"} />}
+                            {!prop.is_recommended && <MaterialIcons name="thumb-down" size={20} color={"red"} />}
+                            <TouchableOpacity style={styles.botaoCurtir} >
+                                <Text style={{color:'white'}}>Curtir</Text>
+                            </TouchableOpacity>
+                        </View>
+                        <View style={styles.ladoB}>
+                            <Text>{prop.review_text}</Text>
+                            <Text style={styles.rodapeReview}>Postada por {prop.review_autor}, em {prop.published_date}</Text>
+                        </View>
                     </View>
                     ); 
                 })} 
@@ -134,7 +141,7 @@ const styles = StyleSheet.create({
   },
   listaReviews:{
     width: '100%',
-    height: '23%',
+    height: '26%',
     backgroundColor: "#FFF"
   },
   textoMercado: {
@@ -164,11 +171,43 @@ textoPreco: {
       alignItems: 'center', 
   },
   itemReview:{
-    margin: 5,
-  },
+      flexDirection:'row',
+      flexWrap: 'wrap',
+      margin: 5,
+      borderBottomColor: 'black',
+      borderBottomWidth: 1,
+    },
+    ladoA:{
+        width:'20%',
+        alignItems: 'center',
+        justifyContent: 'center',
+    },
+    ladoB:{
+        width:'80%'
+    },
   rodapeReview: {
       fontStyle: 'italic',
-      marginTop: 5
+      marginTop: 5,
+      paddingBottom: 5
+  },
+  botaoAdicionaReview:{
+      backgroundColor: "#1e5bc6",
+      width:120,
+      height: 30,
+      borderRadius: 25,
+      marginLeft: 5,
+      marginTop: 5,
+      flexDirection: 'row',
+      alignContent: 'center',
+      alignItems: 'center',
+      justifyContent: 'center',
+  },
+  botaoCurtir:{
+      marginTop: 15,
+      backgroundColor: "#1e5bc6",
+      paddingHorizontal: 10,
+      paddingVertical:5,
+      borderRadius: 25
   }
 });
 
