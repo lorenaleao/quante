@@ -2,6 +2,7 @@
 from bson.objectid import ObjectId
 import pymongo as mg
 from collections import OrderedDict
+import re
 
 # Local application imports
 from secrets.QuanteSecrets import get_login
@@ -34,6 +35,13 @@ class CollectionBase():
             collection = db_mongo["db-quante"][self.collection_name]
             obj = collection.find_one({"name" : name})
             return obj
+    
+    def get_by_substring(self, substr: str):
+        with mg.MongoClient(self.mongo_url) as db_mongo:
+            collection = db_mongo["db-quante"][self.collection_name]
+            regx = re.compile(substr, re.IGNORECASE)
+            obj = collection.find({"name": regx})
+            return list(obj)
 
     def get_list(self):
         with mg.MongoClient(self.mongo_url) as db_mongo:
@@ -306,6 +314,9 @@ class ReviewCollection(CollectionBase):
             db_mongo["db-quante"].command(cmd)
 
     def get_by_name(self, name: str):
+        raise Exception("Review doesn't have a field called name")
+
+    def get_by_substring(self, substr: str):
         raise Exception("Review doesn't have a field called name")
 
     def post(self, obj):
