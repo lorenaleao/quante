@@ -26,7 +26,6 @@ function Login(){
                 <TextInput 
                 placeholder="Insira sua senha"
                 placeholderTextColor="#999"
-                autoCapitalize="words"
                 secureTextEntry={true}
                 autoCorrect={false}
                 value={password}
