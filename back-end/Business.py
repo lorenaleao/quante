@@ -11,6 +11,12 @@ class BusinessBase():
     def get(self, _id):
         return self.collection.get(_id)
 
+    def getByName(self, name: str):
+        return self.collection.getByName(name)
+
+    def list(self):
+        return self.collection.list()
+
     def put(self, obj):
         return self.collection.put(obj)
 

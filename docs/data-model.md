@@ -44,7 +44,7 @@ Campo | Tipo | Descrição
 **_id** | ObjectId | objeto de identificação do documento gerado no momento de sua inserção na coleção |
 **name** | string | nome do estabelecimento |
 **cnpj** | string | CNPJ do estabelecimento |
-**address** | string | endereço do estabelecimento
+**address** | object | endereço do estabelecimento, contendo  estado, cidade, bairro, CEP, rua e número. Apenas os campos cidade e estado são obrigatórios.
 **email** | list | e-mail de contato do estabelecimento |
 **password** | string | senha que dá ao estabelecimento acesso ao seu perfil no aplicativo |
 **create_date** | date | data na qual o perfil do estabelecimento foi criado no aplicativo |
