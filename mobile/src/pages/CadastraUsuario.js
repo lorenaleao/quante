@@ -1,14 +1,45 @@
 import React, { useState } from 'react';
-import {View, Text, TextInput, Button, StyleSheet} from 'react-native';
-function CadastraUsuario(){
+import {View, Text, TextInput, Button, StyleSheet, Alert} from 'react-native';
+
+import api from '../services/api';
+
+import Constants from "expo-constants";
+const { manifest } = Constants;
+
+function CadastraUsuario({navigation}){
 
     const [name, setName] = useState('')
-    const [lastName, setLastName] = useState('')
+    const [age, setAge] = useState('')
+    const [cpf, setCpf] = useState('')
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
 
-    function submitNewUser() {
-        //const response = await api.post('', {params: {name, lastName, email, password}})
+    async function submitNewUser() {
+        let today = new Date()
+        let date = today.getFullYear()+'-'+(today.getMonth()+1)+'-'+today.getDate()
+        let time = today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds()
+        let dateTime = date+' '+time
+        const response = await api.post('/client/post/', {
+            name, 
+            age: Number(age), 
+            cpf, 
+            email, 
+            password, 
+            create_date: dateTime
+        }).then((response) => {
+            Alert.alert(
+                "Sucesso!",
+                "Usuário cadastrado com sucesso!",
+                [
+                { text: "OK", onPress: () => navigation.navigate('Quanté?') }
+                ]
+            )
+            setName('')
+            setAge('')
+            setCpf('')
+            setEmail('')
+            setPassword('')
+        })
     }
 
     return(
@@ -28,12 +59,22 @@ function CadastraUsuario(){
                 <View style={{ height: 10 }}></View>
                 <TextInput 
                 style={styles.defaultTextInput}
-                placeholder="Insira o seu sobrenome"
+                placeholder="Insira sua idade"
                 placeholderTextColor="#999"
-                autoCapitalize="words"
                 autoCorrect={false}
-                value={lastName}
-                onChangeText={setLastName}
+                value={age}
+                onChangeText={setAge}
+                keyboardType="numeric"
+                />
+                <View style={{ height: 10 }}></View>
+                <TextInput 
+                style={styles.defaultTextInput}
+                placeholder="Insira seu CPF"
+                placeholderTextColor="#999"
+                autoCorrect={false}
+                value={cpf}
+                onChangeText={setCpf}
+                keyboardType="numeric"
                 />
                 <View style={{ height: 10 }}></View>
                 <TextInput 
