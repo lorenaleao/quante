@@ -63,6 +63,14 @@ def get(key, _id):
     except Exception as e:
         return f"Internal Server Error: {e}", 500
 
+@app.route("/<string:key>/get/name/<string:name>", methods=["GET"])
+def getByName(key, name):
+    try:
+        data = business[key].getByName(name)
+        return convert(data), 200
+    except Exception as e:
+        return f"Internal Server Error: {e}", 500
+
 @app.route("/<string:key>/list/", methods=["GET"])
 def list(key):
     try:
