@@ -5,27 +5,42 @@ import {MaterialIcons} from '@expo/vector-icons';
 function Produto({route, navigation}){
 
     const [produto, setProd] = useState({});
+    const [reviews, setReview] = useState([]);
 
-    async function procuraNoBanco(){
+    async function getProduto(){
         //const response = await api.get('', {params: {textoBusca}})
         var response
         if(parseInt(route.params.id)%2 == 0){
             response = {
-                data:{id: 0, name:'Yakult', description: 'L. casei Shirota contribui para o equilíbrio da flora intestinal. Porção de 80 g', category:'Frios, Iogurtes e Laticínios' ,pic:'https://api.tendaatacado.com.br/fotos/1209.jpg', price:{SupermercadoBH:'R$7,90', Carrefour:'R$11,49'}}
+                data:{id: 0, name:'Yakult', description: 'L. casei Shirota contribui para o equilíbrio da flora intestinal. Porção de 80 g', category:'Frios, Iogurtes e Laticínios' ,pic:'https://api.tendaatacado.com.br/fotos/1209.jpg', prices:{SupermercadoBH:'R$7,90', Carrefour:'R$11,49',Extra:'R$8,00', Dia: 'R$8,50','Super Nosso':'R$8,50'}}
             }
         } else {
             response = {
-                data:{id: 1, name:'Yakult Desnatado', description: 'Leite Fermentado Desnatado Light 40, da Yakult. Porção de 80 g ', category:'Frios, Iogurtes e Laticínios', pic:'https://static.carrefour.com.br/medias/sys_master/images/images/h8b/hb0/h00/h00/9458275549214.jpg'}
+                data:{id: 1, name:'Yakult Desnatado', description: 'Leite Fermentado Desnatado Light 40, da Yakult. Porção de 80 g ', category:'Frios, Iogurtes e Laticínios', pic:'https://static.carrefour.com.br/medias/sys_master/images/images/h8b/hb0/h00/h00/9458275549214.jpg', prices:{SupermercadoBH:'R$7,90', Carrefour:'R$11,49',Extra:'R$8,00', Dia: 'R$8,50','Super Nosso':'R$8,50'}}
             }
         }
         setProd(response.data);
     }
 
+    async function getReviews(){
+        //const response = await api.get('', {params: {produto.id}})
+        const response = {
+            data:[
+                {review_autor:"Cliente A", review_rating:"5.0", review_text:"Compro pra minha filha toda semana, e graças a esse app eu não compro mais caro no Carrefour.", published_date:"22/09/2020", is_recommended:true, likes:5},
+                {review_autor:"Cliente A", review_rating:"5.0", review_text:"Compro pra minha filha toda semana, e graças a esse app eu não compro mais caro no Carrefour.", published_date:"22/09/2020", is_recommended:true, likes:5},
+                {review_autor:"Cliente A", review_rating:"5.0", review_text:"Compro pra minha filha toda semana, e graças a esse app eu não compro mais caro no Carrefour.", published_date:"22/09/2020", is_recommended:true, likes:5},
+                {review_autor:"Cliente A", review_rating:"5.0", review_text:"Compro pra minha filha toda semana, e graças a esse app eu não compro mais caro no Carrefour.", published_date:"22/09/2020", is_recommended:true, likes:5},
+            ]
+        }
+        setReview(response.data);
+    }
+
     if(JSON.stringify(produto) === JSON.stringify({})){
-        procuraNoBanco();
+        getProduto();
+        getReviews();
     }
   
-    console.log(produto);
+    console.log(reviews);
 
     return (
         <>
@@ -41,14 +56,34 @@ function Produto({route, navigation}){
             </View>
         </View>
         <SafeAreaView>
-            <ScrollView contentContainerStyle={styles.containerListaProdutos} style={styles.listaProdutos} >
-                {produto.prices.map((prop, key) => {
+            <ScrollView contentContainerStyle={styles.containerListaPrecos} style={styles.listaPrecos} >
+                {JSON.stringify(produto) != JSON.stringify({}) && Object.keys(produto.prices).map((prop, key) => {
                     return (
-                    <TouchableOpacity style={styles.itemProduto} >
-                        <Text>Supermercado {key}</Text>
-                        <Text>Preço {prop}</Text>
+                    <TouchableOpacity key={key} style={styles.itemPrecos} >
+                        <Text style={styles.textoMercado}>{prop}</Text>
+                        <Text style={styles.textoPreco}>{produto.prices[prop]}</Text>
                     </TouchableOpacity>
-                    );
+                    ); 
+                })} 
+            </ScrollView>
+        </SafeAreaView>
+        <Text style={styles.titulo}>Avaliações Deste Produto:</Text>
+        <SafeAreaView>
+            <ScrollView style={styles.listaReviews} >
+                {reviews.length > 0 && reviews.map((prop, key) => {
+                    return (
+                    <View key={key} style={styles.itemReview} >
+                        
+                        <Text>{prop.review_text}</Text>
+                        <Text style={styles.rodapeReview}>Postada por {prop.review_autor}, em {prop.published_date}</Text>
+                        <View
+                            style={{
+                                borderBottomColor: 'black',
+                                borderBottomWidth: 1,
+                            }}
+                        />
+                    </View>
+                    ); 
                 })} 
             </ScrollView>
         </SafeAreaView>
@@ -64,6 +99,12 @@ const styles = StyleSheet.create({
       height: '33%',
       backgroundColor: '#FFF',
       flexDirection: 'row',
+  },
+  titulo:{
+      fontWeight: "bold",
+      backgroundColor: 'white',
+      fontSize: 16,
+      padding: 10
   },
   fotoProduto:{
     height: '80%',
@@ -82,8 +123,53 @@ const styles = StyleSheet.create({
   textoLabel:{
     fontWeight: 'bold'
   },
-  containerListaProdutos:{},
-  listaProdutos:{}
+  containerListaPrecos:{
+    justifyContent: 'center',
+    alignItems: 'center', 
+  },
+  listaPrecos:{
+    width: '100%',
+    height: '33%',
+    backgroundColor: "#FFF"
+  },
+  listaReviews:{
+    width: '100%',
+    height: '23%',
+    backgroundColor: "#FFF"
+  },
+  textoMercado: {
+    width: '45%',
+    height: 40,
+    marginLeft: 5,
+    marginTop: 5,
+    marginBottom: 5,
+    textAlign: 'center',
+    backgroundColor: "#1e5bc6",
+    color: 'white'     
+},
+textoPreco: {
+    width: '45%',
+    height: 40,
+    marginRight: 5,
+    marginTop: 5,
+    marginBottom: 5,
+    textAlign: 'center',
+    backgroundColor: "#1e5bc6",
+    color: 'white'
+},
+  itemPrecos:{
+      flex: 1,
+      flexDirection: 'row',
+      justifyContent: 'center',
+      alignItems: 'center', 
+  },
+  itemReview:{
+    margin: 5,
+  },
+  rodapeReview: {
+      fontStyle: 'italic',
+      marginTop: 5
+  }
 });
 
 export default Produto;
