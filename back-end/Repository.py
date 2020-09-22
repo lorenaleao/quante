@@ -5,9 +5,6 @@ import os
 from string import ascii_letters, digits
 from random import choice
 
-# Third party libaries
-from google.cloud import storage
-
 class RepositoryBase():
     
     @staticmethod
@@ -15,10 +12,10 @@ class RepositoryBase():
         return ''.join(choice(ascii_letters + digits) for i in range(size))
 
     def save(self, file) -> str:
-        raise NotImplemented
+        raise NotImplementedError
 
     def load(self, file_name):
-        raise NotImplemented
+        raise NotImplementedError
 
 class LocalRepository(RepositoryBase):
     def __init__(self, repo_base):
