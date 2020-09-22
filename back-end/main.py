@@ -7,6 +7,7 @@ from flask import Flask, request, jsonify, send_file
 
 # Local application imports
 from Business import *
+from Objects import IObject
 from Repository import LocalRepository
 
 app = Flask(__name__)
@@ -23,7 +24,7 @@ business = {
 def convert(obj) -> str:
     if isinstance(obj, dict) or isinstance(obj, bool):
         return json.dumps(obj, default = str) 
-    elif isinstance(obj, BusinessBase):
+    elif isinstance(obj, IObject):
         return json.dumps(obj.__dict__, default = str) 
     elif isinstance(obj, str):
         return obj        
@@ -90,7 +91,18 @@ def email_already_registered(email):
     try:
         val_cli = business["client"].email_already_registered(email)
         val_comp = business["company"].email_already_registered(email)
-        return convert(val_cli or val_comp), 200
+        status = convert(val_cli or val_comp) 
+        return convert(status), 200 if status else 403
+    except Exception as e:
+        return f"Internal Server Error: {e}", 500
+
+@app.route("/login/login/<string:email>/<string:password>", methods=["GET"])
+def login(email, password):
+    try:
+        data_cli = business["client"].get_by_email_password(email, password)
+        data_comp = business["company"].get_by_email_password(email, password)
+        data = convert(data_cli or data_comp) 
+        return convert(data), 200 if data != None else 403
     except Exception as e:
         return f"Internal Server Error: {e}", 500
 
@@ -103,4 +115,4 @@ def update_price(_id, new_price):
         return f"Internal Server Error: {e}", 500
 
 if __name__ == "__main__":
-    app.run(debug = True)
+    app.run(host= '0.0.0.0', debug = True)

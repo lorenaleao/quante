@@ -20,7 +20,7 @@ class Client(IObject):
         
     @staticmethod
     def convert(obj : Union['Client', dict]) -> 'Client':
-        if isinstance(obj, Client):
+        if isinstance(obj, Client) or obj is None:
             return obj
         elif isinstance(obj, dict):
             return Client(
@@ -48,7 +48,7 @@ class Company(IObject):
 
     @staticmethod
     def convert(obj : Union['Company', dict]) -> 'Company':
-        if isinstance(obj, Company):
+        if isinstance(obj, Company) or obj is None:
             return obj
         elif isinstance(obj, dict):
             return Company(
@@ -76,7 +76,7 @@ class Product(IObject):
 
     @staticmethod
     def convert(obj: Union['Product', dict]) -> 'Product':
-        if isinstance(obj, Product):
+        if isinstance(obj, Product) or obj is None:
             return obj
         elif isinstance(obj, dict):
             return Product(
@@ -103,7 +103,7 @@ class Review(IObject):
 
     @staticmethod
     def convert(obj: Union['Review', dict]) -> 'Review':
-        if isinstance(obj, Review):
+        if isinstance(obj, Review) or obj is None:
             return obj
         elif isinstance(obj, dict):
             return Review(
