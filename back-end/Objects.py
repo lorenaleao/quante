@@ -65,8 +65,8 @@ class Company(IObject):
 
 class Product(IObject):
     def __init__(self, _id, name, description, spec, categories, prices):
+        self.relevant_reviews = []
         self.price_history = [] # (time, price)
-        self.reviews = [] # list of rating ids
         self.prices = prices # given a company, a pair containing the current price and a list with requests to change
         self._id = _id
         self.name = name
@@ -88,8 +88,8 @@ class Product(IObject):
                 obj.get("prices", None))
         else:
             raise TypeError(f"Type " + obj.__class__.__name__ + " must be a Dict or Product")
-     
-        
+
+            
 class Review(IObject):
     def __init__(self, _id, product_id, review_author, review_rating, review_text, published_date, is_recommended, likes):
         self._id = _id
@@ -100,7 +100,7 @@ class Review(IObject):
         self.published_date = published_date
         self.is_recommended	= is_recommended	
         self.likes = likes
-        
+
     @staticmethod
     def convert(obj: Union['Review', dict]) -> 'Review':
         if isinstance(obj, Review):

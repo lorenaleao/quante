@@ -12,10 +12,10 @@ class RepositoryBase():
         return ''.join(choice(ascii_letters + digits) for i in range(size))
 
     def save(self, file) -> str:
-        raise NotImplemented
+        raise NotImplementedError
 
     def load(self, file_name):
-        raise NotImplemented
+        raise NotImplementedError
 
 class LocalRepository(RepositoryBase):
     def __init__(self, repo_base):

@@ -3,7 +3,7 @@ import json
 import os
 
 # Third part import
-from flask import Flask, request, jsonify
+from flask import Flask, request, jsonify, send_file
 
 # Local application imports
 from Business import *
@@ -16,7 +16,8 @@ image_repository = LocalRepository("img/")
 business = {
     "client" : ClientBusiness(),
     "company" : CompanyBusiness(),
-    "product": ProductBusiness()
+    "product": ProductBusiness(),
+    "review": ReviewBusiness()
 }
 
 def convert(obj):
@@ -65,6 +66,13 @@ def post_img():
     try:
         url = image_repository.save(request.files["file"])
         return url, 201
+    except Exception as e:
+        return "Internal Server Error: " + str(e), 500
+
+@app.route("/img/get/<string:img_name>", methods=["GET"])
+def get_img(img_name):
+    try:
+        return image_repository.load(img_name), 200
     except Exception as e:
         return f"Internal Server Error: {e}", 500
 
