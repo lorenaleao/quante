@@ -38,6 +38,7 @@ class ProductBusiness(BusinessBase):
     def __init__(self):
         super().__init__(ProductCollection)
 
+
 class ReviewBusiness(BusinessBase):
     def __init__(self):
         super().__init__(ReviewCollection)

@@ -101,7 +101,8 @@ class ClientCollection(CollectionBase):
             collection = db_mongo["db-quante"][self.collection_name]
             obj = collection.find_one({"email" : email})
             return obj != None
-          
+
+
 class CompanyCollection(CollectionBase):
     def __init__(self):
         super().__init__(orm.Company)
@@ -205,6 +206,7 @@ class ProductCollection(CollectionBase):
                     ('validationLevel', 'moderate')])
 
             db_mongo["db-quante"].command(cmd)
+
 
 class ReviewCollection(CollectionBase):
     def __init__(self):
