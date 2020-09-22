@@ -81,9 +81,9 @@ class Product(IObject):
             return Product(
                 obj.get("_id", None), 
                 obj.get("name", None), 
-                obj.get("prices", None), 
                 obj.get("description", None), 
                 obj.get("spec", None), 
-                obj.get("categories", None))
+                obj.get("categories", None),
+                obj.get("prices", None))
         else:
             raise TypeError(f"Type " + obj.__class__.__name__ + " must be a Dict or Product")
