@@ -30,8 +30,7 @@ class Client(IObject):
                 obj.get("email", None), 
                 obj.get("password", None), 
                 obj.get("create_date", None), 
-                obj.get("perfil_img", None)
-            )        
+                obj.get("perfil_img", None))        
         else:
             raise TypeError("Type " + obj.__class__.__name__ + " must be a Dict or Client.")
     
@@ -57,8 +56,7 @@ class Company(IObject):
                 obj.get("email", None), 
                 obj.get("password", None), 
                 obj.get("create_date", None), 
-                obj.get("address", None)
-            )         
+                obj.get("address", None))         
         else:
             raise TypeError(f"Type " + obj.__class__.__name__ + " must be a Dict or Company.")
 
@@ -87,3 +85,31 @@ class Product(IObject):
                 obj.get("prices", None))
         else:
             raise TypeError(f"Type " + obj.__class__.__name__ + " must be a Dict or Product")
+        
+class Review(IObject):
+    def __init__(self, _id, product_id, review_author, review_rating, review_text, published_date, is_recommended, likes):
+        self._id = _id
+        self.product_id = product_id
+        self.review_author = review_author
+        self.review_rating = review_rating
+        self.review_text = review_text
+        self.published_date = published_date
+        self.is_recommended	= is_recommended	
+        self.likes = likes
+        
+    @staticmethod
+    def convert(obj: Union['Review', dict]) -> 'Review':
+        if isinstance(obj, Review):
+            return obj
+        elif isinstance(obj, dict):
+            return Review(
+                obj.get("_id", None), 
+                obj.get("product_id", None), 
+                obj.get("review_author", None), 
+                obj.get("review_rating", None), 
+                obj.get("review_text", None),
+                obj.get("published_date", None),
+                obj.get("is_recommended", None),
+                obj.get("likes", None))
+        else:
+            raise TypeError(f"Type " + obj.__class__.__name__ + " must be a Dict or Review")
