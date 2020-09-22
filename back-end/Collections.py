@@ -29,6 +29,14 @@ class CollectionBase():
             obj = collection.find_one({"_id" : ObjectId(_id)})
             return obj
 
+    def list(self):
+        with mg.MongoClient(self.mongo_url) as db_mongo:
+            collection = db_mongo["db-quante"][self.collection_name]
+            objs_list = []
+            for obj in collection.find():
+                objs_list.append(obj)
+            return objs_list
+
     def put(self, obj):
         _id = obj.pop('_id', None)
         with mg.MongoClient(self.mongo_url) as db_mongo:
