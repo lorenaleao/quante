@@ -2,13 +2,19 @@ import React, { useState } from 'react';
 import { Alert, StyleSheet, ScrollView, SafeAreaView, Text, Image, View, StatusBar, TouchableOpacity } from 'react-native';
 import {MaterialIcons} from '@expo/vector-icons';
 
+import api from '../services/api';
+
 function Produto({route, navigation}){
 
     const [produto, setProd] = useState({});
     const [reviews, setReview] = useState([]);
 
-    async function getProduto(){
-        //const response = await api.get('', {params: {textoBusca}})
+    async function getProduto(){/*
+        const resp = await api.get('product/get/'+route.params.id, ).then((response) => {
+            console.log(response)
+            response.data.prices = {SupermercadoBH:'R$7,90', Carrefour:'R$11,49',Extra:'R$8,00', Dia: 'R$8,50','Super Nosso':'R$8,50'};
+            setProd(response.data)
+        })*/
         var response
         if(parseInt(route.params.id)%2 == 0){
             response = {
@@ -26,9 +32,9 @@ function Produto({route, navigation}){
         //const response = await api.get('', {params: {produto.id}})
         const response = {
             data:[
-                {review_autor:"Cliente A", review_rating:"5.0", review_text:"Compro pra minha filha toda semana, e graças a esse app eu não compro mais caro no Carrefour.", published_date:"22/09/2020", is_recommended:true, likes:5},
-                {review_autor:"Cliente A", review_rating:"5.0", review_text:"Compro pra minha filha toda semana, e graças a esse app eu não compro mais caro no Carrefour.", published_date:"22/09/2020", is_recommended:false, likes:5},
-                {review_autor:"Cliente A", review_rating:"5.0", review_text:"Compro pra minha filha toda semana, e graças a esse app eu não compro mais caro no Carrefour.", published_date:"22/09/2020", is_recommended:true, likes:5},
+                {review_autor:"Cliente A", review_rating:"5.0", review_text:"Compro pra minha filha toda semana, e graças a esse app eu não compro mais caro no Carrefour.", published_date:"21/09/2020", is_recommended:true, likes:5},
+                {review_autor:"Cliente B", review_rating:"0.0", review_text:"Caro e não tão bom quanto chamito.", published_date:"22/09/2020", is_recommended:false, likes:5},
+                {review_autor:"Cliente C", review_rating:"2.0", review_text:"Tô impressionada como os preços variam com os supermercados.", published_date:"22/09/2020", is_recommended:true, likes:5},
                 {review_autor:"Cliente A", review_rating:"5.0", review_text:"Compro pra minha filha toda semana, e graças a esse app eu não compro mais caro no Carrefour.", published_date:"22/09/2020", is_recommended:false, likes:5},
             ]
         }
@@ -43,14 +49,14 @@ function Produto({route, navigation}){
     return (
         <>
         <View style={styles.cabecalho}>
-            <Image source={{uri: produto.pic}} style={styles.fotoProduto} />
+            <Image source={{uri: 'https://vivanosports.com.br/images/sem_foto.png'}} style={styles.fotoProduto} />
             <View style={styles.fichaTecnica}>
                 <Text style={styles.textoLabel}>Nome:</Text>
                 <Text style={styles.campoTexto}>{produto.name}</Text>
                 <Text style={styles.textoLabel}>Descrição:</Text>
                 <Text style={styles.campoTexto}>{produto.description}</Text>
                 <Text style={styles.textoLabel}>Categoria:</Text>
-                <Text>{produto.category}</Text>
+                <Text>{produto.categories}</Text>
             </View>
         </View>
         <SafeAreaView>
@@ -202,6 +208,7 @@ textoPreco: {
   },
   botaoCurtir:{
       marginTop: 15,
+      marginBottom: 5,
       backgroundColor: "#1e5bc6",
       paddingHorizontal: 10,
       paddingVertical:5,
