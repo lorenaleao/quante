@@ -48,7 +48,8 @@ const styles = StyleSheet.create({
     flexDirection: 'row', 
     flexWrap: 'wrap', 
     justifyContent: 'center',
-    alignItems: 'center', 
+    alignItems: 'center',
+    marginTop: '4%'
   },
   box:{
     width: '45%',

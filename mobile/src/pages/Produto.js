@@ -9,12 +9,12 @@ function Produto({route, navigation}){
     const [produto, setProd] = useState({});
     const [reviews, setReview] = useState([]);
 
-    async function getProduto(){
+    async function getProduto(){/*
         const resp = await api.get('product/get/'+route.params.id, ).then((response) => {
             console.log(response)
             response.data.prices = {SupermercadoBH:'R$7,90', Carrefour:'R$11,49',Extra:'R$8,00', Dia: 'R$8,50','Super Nosso':'R$8,50'};
             setProd(response.data)
-        })/*
+        })*/
         var response
         if(parseInt(route.params.id)%2 == 0){
             response = {
@@ -25,7 +25,7 @@ function Produto({route, navigation}){
                 data:{id: 1, name:'Yakult Desnatado', description: 'Leite Fermentado Desnatado Light 40, da Yakult. Porção de 80 g ', category:'Frios, Iogurtes e Laticínios', pic:'https://static.carrefour.com.br/medias/sys_master/images/images/h8b/hb0/h00/h00/9458275549214.jpg', prices:{SupermercadoBH:'R$7,90', Carrefour:'R$11,49',Extra:'R$8,00', Dia: 'R$8,50','Super Nosso':'R$8,50'}}
             }
         }
-        setProd(response.data);*/
+        setProd(response.data);
     }
 
     async function getReviews(){
@@ -43,10 +43,8 @@ function Produto({route, navigation}){
 
     if(JSON.stringify(produto) === JSON.stringify({})){
         getProduto();
-        //getReviews();
+        getReviews();
     }
-  
-    console.log(reviews);
 
     return (
         <>

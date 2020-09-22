@@ -49,6 +49,7 @@ function BuscaProduto({navigation}){
             <SafeAreaView>
                 <ScrollView contentContainerStyle={styles.containerListaProdutos} style={styles.listaProdutos} >
                     {produtos != [] && produtos.map((prop, key) => {
+                        console.log(prop);
                         return (
                         <TouchableOpacity style={styles.itemProduto}  onPress={() => navigation.navigate('Produto', {id:prop._id})}>
                             <Image source={{uri: 'https://vivanosports.com.br/images/sem_foto.png'}} style={styles.fotoProduto} />
