@@ -8,7 +8,10 @@ function Produto({route, navigation}){
     const [reviews, setReview] = useState([]);
 
     async function getProduto(){
-        //const response = await api.get('', {params: {textoBusca}})
+        /*
+        const resp = await api.get('product/get/'+route.params.id, ).then((response) => {
+            setProd(response.data)
+        })*/
         var response
         if(parseInt(route.params.id)%2 == 0){
             response = {
@@ -45,14 +48,14 @@ function Produto({route, navigation}){
     return (
         <>
         <View style={styles.cabecalho}>
-            <Image source={{uri: produto.pic}} style={styles.fotoProduto} />
+            <Image source={{uri: 'https://vivanosports.com.br/images/sem_foto.png'}} style={styles.fotoProduto} />
             <View style={styles.fichaTecnica}>
                 <Text style={styles.textoLabel}>Nome:</Text>
                 <Text style={styles.campoTexto}>{produto.name}</Text>
                 <Text style={styles.textoLabel}>Descrição:</Text>
                 <Text style={styles.campoTexto}>{produto.description}</Text>
                 <Text style={styles.textoLabel}>Categoria:</Text>
-                <Text>{produto.category}</Text>
+                <Text>{produto.categories}</Text>
             </View>
         </View>
         <SafeAreaView>
