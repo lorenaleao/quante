@@ -1,6 +1,7 @@
-# Third part imports
+# Third party imports
 from bson.objectid import ObjectId
 import pymongo as mg
+from collections import OrderedDict
 
 # Local application imports
 from secrets.QuanteSecrets import get_login
@@ -44,20 +45,156 @@ class CollectionBase():
         obj = self.get(_id)
         with mg.MongoClient(self.mongo_url) as db_mongo:
             collection = db_mongo["db-quante"][self.collection_name]
-            ret = collection.delete_one({"_id" : ObjectId(_id)})
+            collection.delete_one({"_id" : ObjectId(_id)})
             return obj
      
 class ClientCollection(CollectionBase):
     def __init__(self):
         super().__init__(orm.Client)
+        with mg.MongoClient(self.mongo_url) as db_mongo:
+            try:
+                db_mongo["db-quante"].create_collection(self.collection_name)
+                
+                print("Criando collection:", self.collection_name)
 
+                vexpr = {
+                    "$jsonSchema": {
+                        "bsonType": "object",
+                        "required": [ "name", "email", "password"],
+                        "properties": {
+                            "name": {
+                            "bsonType": "string",
+                            "description": "must be a string and is required"
+                            },
+                            "age": {
+                            "bsonType": "int",
+                            "minimum": 0,
+                            "maximum": 160,
+                            "exclusiveMaximum": False,
+                            "description": "must be an integer in [ 0, 160 ] and is not required"
+                            },
+                            "cpf": {
+                            "bsonType": "string",
+                            "description": "must be a string and is not required"
+                            },
+                            "email": {
+                            "bsonType": "string",
+                            "description": "must be a string and is required"
+                            },
+                            "password": {
+                            "bsonType": "string",
+                            "description": "must be a string and is required"
+                            }
+                        }
+                    }
+                }
+
+                cmd = OrderedDict([('collMod', self.collection_name),
+                        ('validator', vexpr),
+                        ('validationLevel', 'moderate')])
+
+                db_mongo["db-quante"].command(cmd)
+            except Exception:
+                print("Coleção", self.collection_name, "já existe")
+        
 class CompanyCollection(CollectionBase):
     def __init__(self):
         super().__init__(orm.Company)
+        with mg.MongoClient(self.mongo_url) as db_mongo:
+            try:
+                db_mongo["db-quante"].create_collection(self.collection_name)
+                
+                print("Criando collection:", self.collection_name)
+
+                vexpr = {
+                    "$jsonSchema": {
+                        "bsonType": "object",
+                        "required": [ "name", "cnpj", "address", "email", "password" ],
+                        "properties": {
+                            "name": {
+                            "bsonType": "string",
+                            "description": "must be a string and is required"
+                            },
+                            "cnpj": {
+                            "bsonType": "string",
+                            "description": "must be a string and is required"
+                            },
+                            "address": {
+                            "bsonType": "string",
+                            "description": "must be a string and is required"
+                            },
+                            "email": {
+                            "bsonType": "string",
+                            "description": "must be a string and is required"
+                            },
+                            "password": {
+                            "bsonType": "string",
+                            "description": "must be a string and is required"
+                            }
+                        }
+                    }
+                }
+
+                cmd = OrderedDict([('collMod', self.collection_name),
+                        ('validator', vexpr),
+                        ('validationLevel', 'moderate')])
+
+                db_mongo["db-quante"].command(cmd)
+            except Exception:
+                print("Coleção", self.collection_name, "já existe")
 
 class ProductCollection(CollectionBase):
     def __init__(self):
         super().__init__(orm.Product)
+        with mg.MongoClient(self.mongo_url) as db_mongo:
+            try:
+                db_mongo["db-quante"].create_collection(self.collection_name) 
+                
+                print("Criando collection:", self.collection_name)
+
+                vexpr = {
+                    "$jsonSchema": {
+                        "bsonType": "object",
+                        "required": [ "name", "prices" ],
+                        "properties": {
+                            "name": {
+                            "bsonType": "string",
+                            "description": "must be a string and is required"
+                            },
+                            "image": {
+                            "bsonType": "string",
+                            "description": "must be a string and is not required"
+                            },
+                            "description": {
+                            "bsonType": "string",
+                            "description": "must be a string and is not required"
+                            },
+                            "spec": {
+                            "bsonType": "object"
+                            },
+                            "categories": {
+                            "bsonType": "array"
+                            },
+                            "prices": {
+                            "bsonType": "object"
+                            },
+                            "price_history": {
+                            "bsonType": "array"
+                            },
+                            "reviews": {
+                            "bsonType": "array"
+                            }
+                        }
+                    }
+                }
+
+                cmd = OrderedDict([('collMod', self.collection_name),
+                        ('validator', vexpr),
+                        ('validationLevel', 'moderate')])
+
+                db_mongo["db-quante"].command(cmd)
+            except Exception:
+                print("Coleção", self.collection_name, "já existe")
 
 class ReviewCollection(CollectionBase):
     def __init__(self):
@@ -73,4 +210,3 @@ class ReviewCollection(CollectionBase):
 
         productCollection.put(product)
         return super().post(obj)
-
