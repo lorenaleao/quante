@@ -1,5 +1,6 @@
 # Standard import
 from datetime import datetime as dt
+from datetime import timedelta
 from collections import Counter
 
 # Local application import
@@ -37,6 +38,7 @@ class ClientBusiness(BusinessBase):
         else:
             return client
         
+        
 class CompanyBusiness(BusinessBase):
     def __init__(self):
         super().__init__(CompanyCollection)
@@ -56,23 +58,31 @@ class ProductBusiness(BusinessBase):
     def __init__(self):
         super().__init__(ProductCollection)
 
-    def __price_history_n_days_ago(self, price_history, d = 14):
-        two_weeks = dt.now() - dt.timedelta(days = d)
-        return [i for i in price_history if two_weeks <= i[0] <= dt.now()]
+    def __prices_n_days_ago(self, prices, d = 14):
+        return [i[1] for i in prices if dt.now() - timedelta(days = d) <= i[0] <= dt.now()]
 
-    def update_price(self, _id, new_price):
-        product = self.collection.get(_id)
+    def update_price(self, id_company, id_product, new_price):
+        product = self.collection.get(id_product)
         
-        # Get new prices of the last two weeks ago
-        prices = self.__price_history_n_days_ago(product.price_history, 14)
-
+        # Add in history
         product.price_history.append((dt.now(), new_price))
         
-        if len(prices) > 5:
-            n_prices = len(prices)
-            Counter([i[1] for i in prices[n_prices-5:n_prices]])
-        
-        return self.collection.update_price(_id, new_price)
+        if id_company in product.prices:
+            product.prices[id_company][1].append((dt.now(), new_price))
+            
+            # Get new prices of the last two weeks ago
+            recent_prices = self.__prices_n_days_ago(product.prices[id_company][1], 14)
+
+            # Change the product price, if satisfy the rule
+            n_prices = len(recent_prices)
+            if n_prices > 5:
+                c = Counter([i for i in recent_prices[n_prices-5:n_prices]])
+                product.prices[id_company][0] = c.most_common(1)[0][0]
+        else:
+            product.prices[id_company] = (new_price, [(dt.now(), new_price)])
+                    
+        return self.collection.put(product)
+
     
 class ReviewBusiness(BusinessBase):
     def __init__(self):
