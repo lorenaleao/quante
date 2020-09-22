@@ -1,12 +1,27 @@
 import React, { useState } from 'react';
-import {View, Text, TextInput, Button, StyleSheet} from 'react-native';
-function Login(){
+import {View, Text, TextInput, Button, StyleSheet, Alert} from 'react-native';
+
+import api from '../services/api';
+
+function Login({navigation}){
 
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
 
-    function submitLogin() {
-        //const response = await api.post('', {params: {email, password}})
+    async function submitLogin() {
+        const response = await api.get('/login/login/'+email+'/'+password,).then((response) => {
+            if (response.status === 200) {
+                Alert.alert(
+                    "Sucesso!",
+                    "Login realizado com sucesso!",
+                    [
+                    { text: "OK", onPress: () => navigation.navigate('Quanté?') }
+                    ]
+                )
+                setEmail('')
+                setPassword('')
+            }
+        })
     }
 
     return(
