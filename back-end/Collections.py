@@ -30,7 +30,7 @@ class CollectionBase():
             return obj
 
     def put(self, obj):
-        #obj = self.convert(obj).__dict__
+        obj = self.convert(obj).__dict__
         _id = obj.pop('_id', None)
         with mg.MongoClient(self.mongo_url) as db_mongo:
             collection = db_mongo["db-quante"][self.collection_name]
@@ -47,6 +47,7 @@ class CollectionBase():
             collection = db_mongo["db-quante"][self.collection_name]
             collection.delete_one({"_id" : ObjectId(_id)})
             return obj
+     
      
 class ClientCollection(CollectionBase):
     def __init__(self):
@@ -89,13 +90,18 @@ class ClientCollection(CollectionBase):
                     }
                 }
             }
-
             cmd = OrderedDict([('collMod', self.collection_name),
                     ('validator', vexpr),
                     ('validationLevel', 'moderate')])
 
             db_mongo["db-quante"].command(cmd)
-        
+     
+    def email_already_registered(self, email):
+        with mg.MongoClient(self.mongo_url) as db_mongo:
+            collection = db_mongo["db-quante"][self.collection_name]
+            obj = collection.find_one({"email" : email})
+            return obj != None
+          
 class CompanyCollection(CollectionBase):
     def __init__(self):
         super().__init__(orm.Company)
@@ -140,6 +146,13 @@ class CompanyCollection(CollectionBase):
                     ('validationLevel', 'moderate')])
 
             db_mongo["db-quante"].command(cmd)
+
+    def email_already_registered(self, email):
+        with mg.MongoClient(self.mongo_url) as db_mongo:
+            collection = db_mongo["db-quante"][self.collection_name]
+            obj = collection.find_one({"email" : email})
+            return obj != None
+
 
 class ProductCollection(CollectionBase):
     def __init__(self):

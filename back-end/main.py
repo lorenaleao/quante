@@ -34,7 +34,7 @@ def post(key):
         data = business[key].post(data)
         return convert(data), 201
     except Exception as e:
-        return "Internal Server Error: " + str(e), 500
+        return f"Internal Server Error: {e}", 500
 
 @app.route("/<string:key>/put/", methods=["PUT"])
 def put(key):
@@ -43,7 +43,7 @@ def put(key):
         data = business[key].put(data)
         return convert(data), 201
     except Exception as e:
-        return "Internal Server Error: " + str(e), 500
+        return f"Internal Server Error: {e}", 500
 
 @app.route("/<string:key>/get/<string:_id>", methods=["GET"])
 def get(key, _id):
@@ -51,7 +51,7 @@ def get(key, _id):
         data = business[key].get(_id)
         return convert(data), 200
     except Exception as e:
-        return "Internal Server Error: " + str(e), 500
+        return f"Internal Server Error: {e}", 500
 
 @app.route("/<string:key>/delete/<string:_id>", methods=["DELETE"])
 def delete(key, _id):
@@ -59,7 +59,7 @@ def delete(key, _id):
         data = business[key].delete(_id)
         return convert(data), 200
     except Exception as e:
-        return "Internal Server Error: " + str(e), 500
+        return f"Internal Server Error: {e}", 500
 
 @app.route("/img/post/", methods=["POST"])
 def post_img():
@@ -74,7 +74,16 @@ def get_img(img_name):
     try:
         return image_repository.load(img_name), 200
     except Exception as e:
-        return "Internal Server Error: " + str(e), 500
+        return f"Internal Server Error: {e}", 500
+
+@app.route("/login/email_already_registered/<string:email>", methods=["GET"])
+def email_already_registered(email):
+    try:
+        val_cli = business["client"].email_already_registered(email)
+        val_comp = business["company"].email_already_registered(email)
+        return convert(val_cli or val_comp), 200
+    except Exception as e:
+        return f"Internal Server Error: {e}", 500
 
 if __name__ == "__main__":
     app.run(debug = True)
