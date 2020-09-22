@@ -2,11 +2,3 @@ pymongo==3.11.0
 Flask==1.1.2
 Flask-RESTful==0.3.8
 cryptography==3.0
-google-api-core==1.22.1
-google-auth==1.21.0
-google-cloud-core==1.4.1
-google-cloud-datastore==1.15.0
-google-cloud-storage==1.31.0
-google-crc32c==1.0.0
-google-resumable-media==1.0.0
-googleapis-common-protos==1.52.0
