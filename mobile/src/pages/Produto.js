@@ -2,16 +2,19 @@ import React, { useState } from 'react';
 import { Alert, StyleSheet, ScrollView, SafeAreaView, Text, Image, View, StatusBar, TouchableOpacity } from 'react-native';
 import {MaterialIcons} from '@expo/vector-icons';
 
+import api from '../services/api';
+
 function Produto({route, navigation}){
 
     const [produto, setProd] = useState({});
     const [reviews, setReview] = useState([]);
 
     async function getProduto(){
-        /*
         const resp = await api.get('product/get/'+route.params.id, ).then((response) => {
+            console.log(response)
+            response.data.prices = {SupermercadoBH:'R$7,90', Carrefour:'R$11,49',Extra:'R$8,00', Dia: 'R$8,50','Super Nosso':'R$8,50'};
             setProd(response.data)
-        })*/
+        })/*
         var response
         if(parseInt(route.params.id)%2 == 0){
             response = {
@@ -22,16 +25,16 @@ function Produto({route, navigation}){
                 data:{id: 1, name:'Yakult Desnatado', description: 'Leite Fermentado Desnatado Light 40, da Yakult. Porção de 80 g ', category:'Frios, Iogurtes e Laticínios', pic:'https://static.carrefour.com.br/medias/sys_master/images/images/h8b/hb0/h00/h00/9458275549214.jpg', prices:{SupermercadoBH:'R$7,90', Carrefour:'R$11,49',Extra:'R$8,00', Dia: 'R$8,50','Super Nosso':'R$8,50'}}
             }
         }
-        setProd(response.data);
+        setProd(response.data);*/
     }
 
     async function getReviews(){
         //const response = await api.get('', {params: {produto.id}})
         const response = {
             data:[
-                {review_autor:"Cliente A", review_rating:"5.0", review_text:"Compro pra minha filha toda semana, e graças a esse app eu não compro mais caro no Carrefour.", published_date:"22/09/2020", is_recommended:true, likes:5},
-                {review_autor:"Cliente A", review_rating:"5.0", review_text:"Compro pra minha filha toda semana, e graças a esse app eu não compro mais caro no Carrefour.", published_date:"22/09/2020", is_recommended:false, likes:5},
-                {review_autor:"Cliente A", review_rating:"5.0", review_text:"Compro pra minha filha toda semana, e graças a esse app eu não compro mais caro no Carrefour.", published_date:"22/09/2020", is_recommended:true, likes:5},
+                {review_autor:"Cliente A", review_rating:"5.0", review_text:"Compro pra minha filha toda semana, e graças a esse app eu não compro mais caro no Carrefour.", published_date:"21/09/2020", is_recommended:true, likes:5},
+                {review_autor:"Cliente B", review_rating:"0.0", review_text:"Caro e não tão bom quanto chamito.", published_date:"22/09/2020", is_recommended:false, likes:5},
+                {review_autor:"Cliente C", review_rating:"2.0", review_text:"Tô impressionada como os preços variam com os supermercados.", published_date:"22/09/2020", is_recommended:true, likes:5},
                 {review_autor:"Cliente A", review_rating:"5.0", review_text:"Compro pra minha filha toda semana, e graças a esse app eu não compro mais caro no Carrefour.", published_date:"22/09/2020", is_recommended:false, likes:5},
             ]
         }
@@ -40,7 +43,7 @@ function Produto({route, navigation}){
 
     if(JSON.stringify(produto) === JSON.stringify({})){
         getProduto();
-        getReviews();
+        //getReviews();
     }
   
     console.log(reviews);
@@ -207,6 +210,7 @@ textoPreco: {
   },
   botaoCurtir:{
       marginTop: 15,
+      marginBottom: 5,
       backgroundColor: "#1e5bc6",
       paddingHorizontal: 10,
       paddingVertical:5,

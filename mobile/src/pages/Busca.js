@@ -50,7 +50,7 @@ function BuscaProduto({navigation}){
                 <ScrollView contentContainerStyle={styles.containerListaProdutos} style={styles.listaProdutos} >
                     {produtos != [] && produtos.map((prop, key) => {
                         return (
-                        <TouchableOpacity style={styles.itemProduto}  onPress={() => navigation.navigate('Produto', {id:prop.id})}>
+                        <TouchableOpacity style={styles.itemProduto}  onPress={() => navigation.navigate('Produto', {id:prop._id})}>
                             <Image source={{uri: 'https://vivanosports.com.br/images/sem_foto.png'}} style={styles.fotoProduto} />
                             <Text>{prop.name}</Text>
                             <Text>Preço Mín: {prop.prices[Object.keys(prop.prices)[0]][1][0]}</Text>
