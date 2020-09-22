@@ -17,13 +17,22 @@ class BusinessBase():
     def delete(self, _id):
         return self.collection.delete(_id)
 
+
 class ClientBusiness(BusinessBase):
     def __init__(self):
         super().__init__(ClientCollection)
+        
+    def email_already_registered(self, email):
+        return self.collection.email_already_registered(email)
+
 
 class CompanyBusiness(BusinessBase):
     def __init__(self):
         super().__init__(CompanyCollection)
+
+    def email_already_registered(self, email):
+        return self.collection.email_already_registered(email)
+
 
 class ProductBusiness(BusinessBase):
     def __init__(self):

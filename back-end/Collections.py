@@ -47,13 +47,28 @@ class CollectionBase():
             ret = collection.delete_one({"_id" : ObjectId(_id)})
             return obj
      
+     
 class ClientCollection(CollectionBase):
     def __init__(self):
         super().__init__(orm.Client)
 
+    def email_already_registered(self, email):
+        with mg.MongoClient(self.mongo_url) as db_mongo:
+            collection = db_mongo["db-quante"][self.collection_name]
+            obj = collection.find_one({"email" : email})
+            return obj != None
+    
+    
 class CompanyCollection(CollectionBase):
     def __init__(self):
         super().__init__(orm.Company)
+
+    def email_already_registered(self, email):
+        with mg.MongoClient(self.mongo_url) as db_mongo:
+            collection = db_mongo["db-quante"][self.collection_name]
+            obj = collection.find_one({"email" : email})
+            return obj != None
+
 
 class ProductCollection(CollectionBase):
     def __init__(self):

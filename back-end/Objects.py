@@ -6,6 +6,7 @@ class IObject():
     def convert(obj : Union['IObject', dict]) -> 'IObject':
         raise NotImplementedError
 
+
 class Client(IObject):
     def __init__(self, _id, name, cpf, age, email, password, create_date, perfil_img):
         self._id = _id
@@ -34,6 +35,7 @@ class Client(IObject):
         else:
             raise TypeError("Type " + obj.__class__.__name__ + " must be a Dict or Client.")
     
+    
 class Company(IObject):
     def __init__(self, _id, name, cnpj, email, password, create_date, address):
         self._id = _id
@@ -60,6 +62,7 @@ class Company(IObject):
         else:
             raise TypeError(f"Type " + obj.__class__.__name__ + " must be a Dict or Company.")
 
+
 class Product(IObject):
     def __init__(self, _id, name, description, spec, categories, prices):
         self.price_history = [] # (time, price)
@@ -85,6 +88,7 @@ class Product(IObject):
                 obj.get("prices", None))
         else:
             raise TypeError(f"Type " + obj.__class__.__name__ + " must be a Dict or Product")
+     
         
 class Review(IObject):
     def __init__(self, _id, product_id, review_author, review_rating, review_text, published_date, is_recommended, likes):
