@@ -78,12 +78,12 @@ class Product(IObject):
         if isinstance(obj, Product):
             return obj
         elif isinstance(obj, dict):
-            _id = obj.get("_id", None)
-            name = obj.get("name", None)
-            prices = obj.get("prices", None)
-            description = obj.get("description", None)
-            spec = obj.get("spec", None)
-            categories = obj.get("categories", None)
-            return Product(_id, name, description, spec, categories, prices)
+            return Product(
+                obj.get("_id", None), 
+                obj.get("name", None), 
+                obj.get("prices", None), 
+                obj.get("description", None), 
+                obj.get("spec", None), 
+                obj.get("categories", None))
         else:
             raise TypeError(f"Type " + obj.__class__.__name__ + " must be a Dict or Product")
