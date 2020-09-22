@@ -5,9 +5,6 @@ import os
 from string import ascii_letters, digits
 from random import choice
 
-# Third party libaries
-from google.cloud import storage
-
 class RepositoryBase():
     
     @staticmethod
@@ -29,13 +26,7 @@ class LocalRepository(RepositoryBase):
         with open(f"{self.repo_base}{new_filename}", "wb") as img:
             img.write(file.read())
         return new_filename
-
-class ImageGCloudRepository(RepositoryBase):
-    def save(self, file) -> str:
-        os.environ["GOOGLE_APPLICATION_CREDENTIALS"] = "secrets/GCredentials.json" 
-        client = storage.Client() 
-        bucket = client.get_bucket("quante-bucket") 
-        blob = bucket.blob(self._get_random_string() + pathlib.Path(file.filename).suffix) 
-        blob.upload_from_string(file.read())
-        blob.make_public()
-        return blob.public_url
+    
+    def load(self, file_name):
+        with open(f"{self.repo_base}{file_name}", "rb") as img:
+            return img.read()
