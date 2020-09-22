@@ -30,7 +30,6 @@ class CollectionBase():
             return obj
 
     def put(self, obj):
-        obj = self.convert(obj).__dict__
         _id = obj.pop('_id', None)
         with mg.MongoClient(self.mongo_url) as db_mongo:
             collection = db_mongo["db-quante"][self.collection_name]
