@@ -20,8 +20,17 @@ business = {
     "review": ReviewBusiness()
 }
 
-def convert(obj):
-    return json.dumps(obj, default = str) if obj != None else "null"
+def convert(obj) -> str:
+    if isinstance(obj, dict) or isinstance(obj, bool):
+        return json.dumps(obj, default = str) 
+    elif isinstance(obj, BusinessBase):
+        return json.dumps(obj.__dict__, default = str) 
+    elif isinstance(obj, str):
+        return obj        
+    elif obj == None: 
+        return "null"
+    else:
+        raise Exception(f"Object {obj} has an unknown type {type(obj)}.")
 
 @app.route("/")
 def it_works():
@@ -82,6 +91,14 @@ def email_already_registered(email):
         val_cli = business["client"].email_already_registered(email)
         val_comp = business["company"].email_already_registered(email)
         return convert(val_cli or val_comp), 200
+    except Exception as e:
+        return f"Internal Server Error: {e}", 500
+
+@app.route("/product/update_price/<string:_id>/<float:new_price>", methods=["PATCH"])
+def update_price(_id, new_price):
+    try:
+        data = business["product"].update_price(_id, new_price)
+        return convert(data), 200
     except Exception as e:
         return f"Internal Server Error: {e}", 500
 
