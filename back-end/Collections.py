@@ -2,6 +2,7 @@
 from bson.objectid import ObjectId
 import pymongo as mg
 from collections import OrderedDict
+import re
 
 # Local application imports
 from secrets.QuanteSecrets import get_login
@@ -28,6 +29,27 @@ class CollectionBase():
             collection = db_mongo["db-quante"][self.collection_name]
             obj = collection.find_one({"_id" : ObjectId(_id)})
             return self.convert(obj)
+
+    def get_by_name(self, name: str):
+        with mg.MongoClient(self.mongo_url) as db_mongo:
+            collection = db_mongo["db-quante"][self.collection_name]
+            obj = collection.find_one({"name" : name})
+            return obj
+    
+    def get_by_substring(self, substr: str):
+        with mg.MongoClient(self.mongo_url) as db_mongo:
+            collection = db_mongo["db-quante"][self.collection_name]
+            regx = re.compile(substr, re.IGNORECASE)
+            obj = collection.find({"name": regx})
+            return list(obj)
+
+    def get_list(self):
+        with mg.MongoClient(self.mongo_url) as db_mongo:
+            collection = db_mongo["db-quante"][self.collection_name]
+            objs_list = []
+            for obj in collection.find():
+                objs_list.append(obj)
+            return objs_list
 
     def put(self, obj):
         obj = {k : v for k, v in self.convert(obj).__dict__.items() if v is not None}
@@ -127,8 +149,35 @@ class CompanyCollection(CollectionBase):
                         "description": "must be a string and is required"
                         },
                         "address": {
-                        "bsonType": "string",
-                        "description": "must be a string and is required"
+                        "bsonType": "object",
+                        "required": [ "city", "state" ],
+                        "properties": {
+                            "street": {
+                                "bsonType": "string",
+                                "description": "must be a string if the field exists"
+                            },
+                            "number": {
+                                "bsonType": "int",
+                                "minimum": 0,
+                                "description": "must be an integer if the field exists"
+                            },
+                            "neighborhood": {
+                                "bsonType": "string",
+                                "description": "must be a string if the field exists"
+                            },
+                            "city": {
+                                "bsonType": "string",
+                                "description": "must be a string and is required"
+                            },
+                            "state": {
+                                "bsonType": "string",
+                                "description": "must be a string and is required"
+                            }, 
+                            "CEP": {
+                                "bsonType": "string",
+                                "description": "must be a string if the field exists"
+                            },
+                        },
                         },
                         "email": {
                         "bsonType": "string",
@@ -184,6 +233,12 @@ class ProductCollection(CollectionBase):
                         },
                         "spec": {
                         "bsonType": "object"
+                        # since this is an object that can be very different for each type 
+                        # of product, I will not define specific and required fields for it, 
+                        # but here are some examples of fields that may exist: brand, model, 
+                        # line, series, heigh, width, depth, weight...
+                        #
+                        # it will be essentially a dictionary, though
                         },
                         "categories": {
                         "bsonType": "array"
@@ -260,6 +315,12 @@ class ReviewCollection(CollectionBase):
                     ('validationLevel', 'moderate')])
 
             db_mongo["db-quante"].command(cmd)
+
+    def get_by_name(self, name: str):
+        raise Exception("Review doesn't have a field called name")
+
+    def get_by_substring(self, substr: str):
+        raise Exception("Review doesn't have a field called name")
 
     def post(self, obj):
         productCollection = ProductCollection()

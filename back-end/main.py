@@ -1,8 +1,8 @@
-# Standart import
+# Standard imports
 import json
 import os
 
-# Third part import
+# Third party import
 from flask import Flask, request, jsonify, send_file
 
 # Local application imports
@@ -22,7 +22,7 @@ business = {
 }
 
 def convert(obj) -> str:
-    if isinstance(obj, dict) or isinstance(obj, bool):
+    if isinstance(obj, dict) or isinstance(obj, bool) or isinstance(obj, list):
         return json.dumps(obj, default = str) 
     elif isinstance(obj, IObject):
         return json.dumps(obj.__dict__, default = str) 
@@ -59,6 +59,30 @@ def put(key):
 def get(key, _id):
     try:
         data = business[key].get(_id)
+        return convert(data), 200
+    except Exception as e:
+        return f"Internal Server Error: {e}", 500
+
+@app.route("/<string:key>/get/name/<string:name>", methods=["GET"])
+def get_by_name(key, name):
+    try:
+        data = business[key].get_by_name(name)
+        return convert(data), 200
+    except Exception as e:
+        return f"Internal Server Error: {e}", 500
+
+@app.route("/<string:key>/get/substr/<string:pattern>", methods=["GET"])
+def get_by_substring(key, pattern):
+    try:
+        data = business[key].get_by_substring(pattern)
+        return convert(data), 200
+    except Exception as e:
+        return f"Internal Server Error: {e}", 500
+
+@app.route("/<string:key>/list/", methods=["GET"])
+def get_list(key):
+    try:
+        data = business[key].get_list()
         return convert(data), 200
     except Exception as e:
         return f"Internal Server Error: {e}", 500
