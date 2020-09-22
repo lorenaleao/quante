@@ -196,6 +196,55 @@ class ProductCollection(CollectionBase):
 class ReviewCollection(CollectionBase):
     def __init__(self):
         super().__init__(orm.Review)
+        with mg.MongoClient(self.mongo_url) as db_mongo:
+            try:
+                db_mongo["db-quante"].create_collection(self.collection_name) 
+                print("Criando collection:", self.collection_name)
+            except Exception:
+                print("Coleção", self.collection_name, "já existe")
+            
+            vexpr = {
+                "$jsonSchema": {
+                    "bsonType": "object",
+                    "required": [ "product_id", "review_author", "review_rating", "review_text", "published_date", "is_recommended" ],
+                    "properties": {
+                        "product_id": {
+                        "bsonType": "string",
+                        "description": "must be a string and is required"
+                        },
+                        "review_author": {
+                        "bsonType": "string",
+                        "description": "must be a string and is required"
+                        },
+                        "review_rating": {
+                        "bsonType": "double",
+                        "description": "must be a double and is required"
+                        },
+                        "review_text": {
+                        "bsonType": "string",
+                        "description": "must be a string and is required"
+                        },
+                        "published_date": {
+                        "bsonType": "string",
+                        "description": "must be a string and is required"
+                        },
+                        "is_recommended": {
+                        "bsonType": "bool",
+                        "description": "must be a boolean and is required"
+                        },
+                        "likes": {
+                        "bsonType": "int",
+                        "description": "must be an integer and is not required"
+                        }
+                    }
+                }
+            }
+
+            cmd = OrderedDict([('collMod', self.collection_name),
+                    ('validator', vexpr),
+                    ('validationLevel', 'moderate')])
+
+            db_mongo["db-quante"].command(cmd)
 
     def post(self, obj):
         productCollection = ProductCollection()
