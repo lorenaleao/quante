@@ -125,8 +125,35 @@ class CompanyCollection(CollectionBase):
                         "description": "must be a string and is required"
                         },
                         "address": {
-                        "bsonType": "string",
-                        "description": "must be a string and is required"
+                        "bsonType": "object",
+                        "required": [ "city", "state" ],
+                        "properties": {
+                            "street": {
+                                "bsonType": "string",
+                                "description": "must be a string if the field exists"
+                            },
+                            "number": {
+                                "bsonType": "int",
+                                "minimum": 0,
+                                "description": "must be an integer if the field exists"
+                            },
+                            "neighborhood": {
+                                "bsonType": "string",
+                                "description": "must be a string if the field exists"
+                            },
+                            "city": {
+                                "bsonType": "string",
+                                "description": "must be a string and is required"
+                            },
+                            "state": {
+                                "bsonType": "string",
+                                "description": "must be a string and is required"
+                            }, 
+                            "CEP": {
+                                "bsonType": "string",
+                                "description": "must be a string if the field exists"
+                            },
+                        },
                         },
                         "email": {
                         "bsonType": "string",
@@ -182,6 +209,12 @@ class ProductCollection(CollectionBase):
                         },
                         "spec": {
                         "bsonType": "object"
+                        # since this is an object that can be very different for each type 
+                        # of product, I will not define specific and required fields for it, 
+                        # but here are some examples of fields that may exist: brand, model, 
+                        # line, series, heigh, width, depth, weight...
+                        #
+                        # it will be essentially a dictionary, though
                         },
                         "categories": {
                         "bsonType": "array"
