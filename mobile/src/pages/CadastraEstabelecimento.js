@@ -14,6 +14,7 @@ function CadastraEstabelecimento(){
             <View style={{ height: 20 }}></View>
             <View style={styles.newEstablishmentForm}>
                 <TextInput 
+                style={styles.defaultTextInput}
                 placeholder="Insira o nome do estabelecimento"
                 placeholderTextColor="#999"
                 autoCapitalize="words"
@@ -36,6 +37,10 @@ function CadastraEstabelecimento(){
 }
 
 const styles = StyleSheet.create({
+    defaultTextInput: {
+        padding: 8,
+        backgroundColor: '#FFF'
+    },
     newEstablishmentLabel: {
         marginTop: 20,
         marginLeft: 20,

@@ -17,6 +17,7 @@ function CadastraUsuario(){
             <View style={{ height: 20 }}></View>
             <View style={styles.loginForm}>
                 <TextInput 
+                style={styles.defaultTextInput}
                 placeholder="Insira o seu nome"
                 placeholderTextColor="#999"
                 autoCapitalize="words"
@@ -26,6 +27,7 @@ function CadastraUsuario(){
                 />
                 <View style={{ height: 10 }}></View>
                 <TextInput 
+                style={styles.defaultTextInput}
                 placeholder="Insira o seu sobrenome"
                 placeholderTextColor="#999"
                 autoCapitalize="words"
@@ -35,6 +37,7 @@ function CadastraUsuario(){
                 />
                 <View style={{ height: 10 }}></View>
                 <TextInput 
+                style={styles.defaultTextInput}
                 placeholder="Insira o seu email"
                 placeholderTextColor="#999"
                 autoCapitalize="words"
@@ -44,6 +47,7 @@ function CadastraUsuario(){
                 />
                 <View style={{ height: 10 }}></View>
                 <TextInput 
+                style={styles.defaultTextInput}
                 placeholder="Insira sua senha"
                 placeholderTextColor="#999"
                 secureTextEntry={true}
@@ -66,6 +70,10 @@ function CadastraUsuario(){
 }
 
 const styles = StyleSheet.create({
+    defaultTextInput: {
+        padding: 8,
+        backgroundColor: '#FFF'
+    },
     loginLabel: {
         marginTop: 20,
         marginLeft: 20,

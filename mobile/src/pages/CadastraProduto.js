@@ -15,7 +15,7 @@ function CadastraProduto(){
             <View style={{ height: 20 }}></View>
             <View style={styles.newProductForm}>
                 <TextInput 
-                style = {styles.searchInput}
+                style={styles.defaultTextInput}
                 placeholder="Insira o nome do produto"
                 placeholderTextColor="#999"
                 autoCapitalize="words"
@@ -25,7 +25,7 @@ function CadastraProduto(){
                 />
                 <View style={{ height: 10 }}></View>
                 <TextInput 
-                style = {styles.searchInput}
+                style={styles.defaultTextInput}
                 placeholder="Insira o preço do produto"
                 placeholderTextColor="#999"
                 keyboardType="numeric"
@@ -47,6 +47,10 @@ function CadastraProduto(){
 }
 
 const styles = StyleSheet.create({
+    defaultTextInput: {
+        padding: 8,
+        backgroundColor: '#FFF'
+    },
     newProductLabel: {
         marginTop: 20,
         marginLeft: 20,
