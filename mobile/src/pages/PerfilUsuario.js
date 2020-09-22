@@ -3,7 +3,7 @@ import { Alert, StyleSheet, Text, Image, View, StatusBar, TouchableOpacity } fro
 import {MaterialIcons} from '@expo/vector-icons';
 import { TextInput } from 'react-native-gesture-handler';
 
-function CadastraUsuario({navigation}){
+function PerfilUsuario({navigation}){
 
   const [usuario, setUsr] = useState({});
 
@@ -160,4 +160,4 @@ const styles = StyleSheet.create({
   }
 });
 
-export default CadastraUsuario;
+export default PerfilUsuario;

@@ -32,8 +32,11 @@ function Routes() {
             },
         }}>
         <Stack.Screen name="Quanté?" component={Main}/>
-        <Stack.Screen name="CadastrarProduto" component={CadastraProduto} />
-        <Stack.Screen name="Perfil" component={CadastrarUsuario} />
+        <Stack.Screen name="Login" component={Login}/>
+        <Stack.Screen name="Cadastrar Usuário" component={CadastraUsuario}/>
+        <Stack.Screen name="Cadastrar Estabelecimento" component={CadastraEstabelecimento}/>
+        <Stack.Screen name="Cadastrar Produto" component={CadastraProduto} />
+        <Stack.Screen name="Perfil" component={PerfilUsuario} />
         <Stack.Screen name="Pesquisar" component={BuscaProduto} />
         <Stack.Screen name="Produto" component={Produto} />
         </Stack.Navigator>
