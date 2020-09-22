@@ -3,16 +3,19 @@ import { Alert, StyleSheet, Text, Image, View, StatusBar, TouchableOpacity } fro
 import {MaterialIcons} from '@expo/vector-icons';
 import { TextInput } from 'react-native-gesture-handler';
 
-function PerfilUsuario({navigation}){
+import api from '../services/api';
+
+function PerfilUsuario({route, navigation}){
 
   const [usuario, setUsr] = useState({});
+  //const usrID = route.params.uID;
+  const usrID = '5f6a2f7dd2c784e8ef49ef5d';
 
   async function getUsuario(){
-    //const response = await api.get('', {params: {cpf}})
-    const response = {
-        data:{id: 0, name:'Cliente A', cpf: '123.456.789-10', idade: "22", email: "cliente@esseapp.com", senha: '123456', contribuiu:'5', lastSup:"Supermercado BH", lastProd:"Yakult", pic:'https://eshendetesia.com/images/user-profile.png'}
-    }
-    setUsr(response.data);
+    console.log('ID:' + usrID);
+    const getBanco = await api.get('client/get/5f6a2f7dd2c784e8ef49ef5d',).then((resp) => {
+        setUsr(resp.data)
+    })
   }
 
   async function deleteUsuario(){
@@ -48,14 +51,14 @@ function PerfilUsuario({navigation}){
         <>
         <View style={styles.cabecalho}/>
         <View style={styles.borda}/>
-        <Image source={{uri: usuario.pic}} style={styles.fotoPerfil} />
+        <Image source={{uri: 'https://eshendetesia.com/images/user-profile.png'}} style={styles.fotoPerfil} />
         <View style={styles.campoTexto}>
             <Text style={styles.textoLabel}>Nome: </Text>
             <TextInput>{usuario.name}</TextInput>
         </View>
         <View style={styles.campoTexto}>
             <Text style={styles.textoLabel}>Idade: </Text>
-            <TextInput>{usuario.idade}</TextInput>
+            <TextInput>{usuario.age}</TextInput>
         </View>
         <View style={styles.campoTexto}>
             <Text style={styles.textoLabel}>CPF: </Text>
@@ -67,17 +70,16 @@ function PerfilUsuario({navigation}){
         </View>
         <View style={styles.campoTexto}>
             <Text style={styles.textoLabel}>Senha: </Text>
-            <TextInput secureTextEntry={true}>{usuario.senha}</TextInput>
+            <TextInput secureTextEntry={true}>{usuario.password}</TextInput>
         </View>
         <View style={styles.campoTexto}>
             <View style={styles.box}>
-              <Text style={styles.textoLabel}>Contribuições:</Text>
-              <Text>{usuario.contribuiu}</Text>
+              <Text style={styles.textoLabel}>Avaliações:</Text>
+              <Text>5</Text>
             </View>
             <View style={styles.box}>
-              <Text style={styles.textoLabel}>Última Contribuição:</Text>
-              <Text>{usuario.lastSup}</Text>
-              <Text>{usuario.lastProd}</Text>
+              <Text style={styles.textoLabel}>Última Avaliação:</Text>
+              <Text>Yakult</Text>
             </View>
         </View>
         <View style={styles.botoesMenu}>

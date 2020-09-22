@@ -39,8 +39,6 @@ function Produto({route, navigation}){
         getProduto();
         getReviews();
     }
-  
-    console.log(reviews);
 
     return (
         <>

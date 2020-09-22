@@ -31,8 +31,8 @@ function Routes() {
                 fontWeight: 'bold',
             },
         }}>
-        <Stack.Screen name="Quanté?" component={Main}/>
         <Stack.Screen name="Login" component={Login}/>
+        <Stack.Screen name="Quanté?" component={Main}/>
         <Stack.Screen name="Cadastrar Usuário" component={CadastraUsuario}/>
         <Stack.Screen name="Cadastrar Estabelecimento" component={CadastraEstabelecimento}/>
         <Stack.Screen name="Cadastrar Produto" component={CadastraProduto} />
