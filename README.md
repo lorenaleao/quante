@@ -32,13 +32,13 @@ Será desenvolvido como um trabalho para a disciplina de [Engenharia de Software
 - [ ] **Cadastrar um produto** 
   - [ ] Criar tela do cadastro do produto - _Guilherme Miranda_
   - [x] Criar um método POST para inserção dos dados no banco - _Tomaz Gomes_
-  - [ ] Criar estrutura no banco para armazenar os dados do produto - _Lorena Leão_
+  - [x] Criar estrutura no banco para armazenar os dados do produto - _Lorena Leão_
   - [ ] Criar método para cadastrar imagens no back-end - _Raphael Augusto_
 
 - [ ] **Cadastrar estabelecimento**
   - [ ] Criar tela do cadastro do estabelecimento - _Guilherme Miranda_
   - [x] Criar um método POST para inserção dos dados no banco - _Raphael Augusto_
-  - [ ] Criar estrutura no banco para armazenar os dados do produto - _Lorena Leão_
+  - [x] Criar estrutura no banco para armazenar os dados do estabelecimento - _Lorena Leão_
 
 - [ ] **Fazer pesquisa na base de dados**
   - [ ] Criar tela para pesquisa de produto - _Matheus Guilherme Veloso_
@@ -54,28 +54,28 @@ Será desenvolvido como um trabalho para a disciplina de [Engenharia de Software
 - [ ] **Cadastrar-se no sistema**
   - [ ] Criar tela de cadastro - _Guilherme Miranda_
   - [ ] Criar tela de exbir o perfil do usuário (essa tela pode ser editada e possui botão de exclusão) - _Matheus Guilherme Veloso_
-  - [ ] Criar tabela dos usuários - _Lorena Leão_
+  - [x] Criar tabela dos usuários - _Lorena Leão_
   - [x] Criar métodos CRUD para o usuário - _Raphael Augusto_
 
 - [ ] **Avaliar produto**
-  - [ ] Criar tabela no banco que guarda as avaliações do produto - _Lorena Leão_
+  - [x] Criar tabela no banco que guarda as avaliações do produto - _Lorena Leão_
   - [ ] Criar tela de exibição do produto com campo de avaliação - _Matheus Guilherme Veloso_
   - [ ] Criar métodos CRUD - _Tomaz Gomes_
 
 - [ ] **Atualizar dados do produto**
-  - [ ] Criar estrutura para requisição de atualização no banco - _Lorena Leão_
+  - [x] Criar estrutura para requisição de atualização no banco - _Lorena Leão_
   - [ ] Criar uma tela para inserir a requisição de atualização do produto - _Guilherme Miranda_
   - [ ] Criar método que verifica se uma quantidade X de requisições foi feita, e após este número de requisições, o valor mais frequente se torna o valor oficial do produto. - _Raphael Augusto_
 
 - [ ] **Avaliar Estabelecimentos**
   - [ ] Criar tela que exibe informações do estabelecimento com os campos de avaliação - _Guilherme Miranda_
-  - [x] Criar métodos CRUD - _Tomaz Gomes_
-  - [ ] Criar estruturas no banco para armazenar as avaliações - _Lorena Leão_
+  - [] Criar métodos CRUD - _Tomaz Gomes_
+  - [] Criar estruturas no banco para armazenar as avaliações - _Lorena Leão_
 
 - [ ] **Observar o histórico das atualizações do produto**
   - [ ] Criar na tela de exibição do produto a interface de exibição do histórico de atualizações do produto - _Matheus Guilherme Veloso_
   - [ ] Criar métodos CRUD - _Tomaz Gomes_
-  - [ ] Criar estrutura no banco pra armazenar o histórico de atualização - _Lorena Leão_
+  - [x] Criar estrutura no banco pra armazenar o histórico de atualização - _Lorena Leão_
 
 - [ ] **Comparar produtos**
   - [ ] Criar uma tela para exibir os produtos comparados - _Guilherme Miranda_
