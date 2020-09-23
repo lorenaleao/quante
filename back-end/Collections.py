@@ -302,7 +302,6 @@ class ReviewCollection(CollectionBase):
                         },
                         "review_text": {
                         "bsonType": "string",
-                        "description": "must be a string and is required"
                         },
                         "published_date": {
                         "bsonType": "string",
@@ -332,13 +331,3 @@ class ReviewCollection(CollectionBase):
     def get_by_substring(self, substr: str):
         raise Exception("Review doesn't have a field called name")
 
-    def post(self, obj):
-        productCollection = ProductCollection()
-        product = productCollection.get(obj["product_id"])
-        obj = orm.Review.convert(obj).__dict__
-
-        if len(product["relevant_reviews"]) < 10:
-            product["relevant_reviews"].append(obj)
-
-        productCollection.put(product)
-        return super().post(obj)

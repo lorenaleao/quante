@@ -63,3 +63,30 @@ class ProductBusiness(BusinessBase):
 class ReviewBusiness(BusinessBase):
     def __init__(self):
         super().__init__(ReviewCollection)
+
+    def post(self, obj):
+        productBusiness = ProductBusiness()
+        product = productBusiness.get(obj["product_id"])
+        obj = Review.convert(obj).__dict__
+
+        if len(product["relevant_reviews"]) < 10:
+            product["relevant_reviews"].append(obj)
+
+        productBusiness.put(product)
+        return super().post(obj)
+
+    def put(self, obj):
+        productBusiness = ProductBusiness()
+        product = productBusiness.get(obj["product_id"])
+        obj = Review.convert(obj).__dict__
+
+        i = 0;
+        index = -1
+        for review in product["relevant_reviews"]:
+            if review["_id"] == obj["_id"]:
+                index = i
+            i += 1
+        
+        product["relevant_reviews"][index] = obj
+        productBusiness.put(product)
+        return super().put(obj)
