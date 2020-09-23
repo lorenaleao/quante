@@ -62,34 +62,31 @@ class CompanyBusiness(BusinessBase):
         else:
             return company
 
-
 class ProductBusiness(BusinessBase):
     def __init__(self):
         super().__init__(ProductCollection)
 
+    def __to_datetime(self, x):
+        if isinstance(x, dt):
+            return x
+        else:
+            return dt.strptime(x, "%Y-%m-%d %H:%M:%S.%f")
+    
     def __prices_n_days_ago(self, prices, d = 14):
-        return [i[1] for i in prices if dt.now() - timedelta(days = d) <= i[0] <= dt.now()]
+        return [i[1] for i in prices if (dt.now() - timedelta(days = d)) <= self.__to_datetime(i[0]) <= dt.now()]
 
     def update_price(self, id_company, id_product, new_price):
         product = self.collection.get(id_product)
-        
-        # Add in history
-        product.price_history.append((dt.now(), new_price))
-        
+        product.price_history.append((dt.now(), new_price)) # Add in history
         if id_company in product.prices:
             product.prices[id_company][1].append((dt.now(), new_price))
-            
-            # Get new prices of the last two weeks ago
-            recent_prices = self.__prices_n_days_ago(product.prices[id_company][1], 14)
-
-            # Change the product price, if satisfy the rule
+            recent_prices = self.__prices_n_days_ago(product.prices[id_company][1], 14)# Get new prices of the last two weeks ago
             n_prices = len(recent_prices)
             if n_prices > 5:
                 c = Counter([i for i in recent_prices[n_prices-5:n_prices]])
                 product.prices[id_company][0] = c.most_common(1)[0][0]
         else:
             product.prices[id_company] = (new_price, [(dt.now(), new_price)])
-                    
         return self.collection.put(product)
 
     

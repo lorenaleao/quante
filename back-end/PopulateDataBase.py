@@ -33,7 +33,7 @@ padaria_joana = json.loads(r_padaria_joana.text)
 url = "http://localhost:5000/product/post/"
 data = {
     "name" : "Dose Cachaça Sul de Minas",
-    "image" : None, 
+    "image" : "", 
     "description" : "Dose da Cachaça Sul de Minas. A cachaça Sul de Minas é conecida pelo sabor amadeirado e por seguir uma receita tradicional desde de 1920.", 
     "spec" : {
         "marca" : "Cachaça Sul de Minas",
@@ -43,14 +43,17 @@ data = {
     },
     "categories" : ["bebida alcoólica", "bebida", "produto brasileiro", "deliciosa"],
     "prices" : {
-        boteco_paulo["_id"] : (1.0, [1.0, 1.1, 1.0, 1.0])
+        boteco_paulo["_id"] : [1.0, [[str(datetime.now()), 1.00], [str(datetime.now()), 1.00]]]
     },
     "price_history" : [(str(datetime.now()), 1.00)],
     "reviews" : []
 }
 headers = {'Content-type': 'application/json', 'Accept': 'text/plain'}
-r = requests.post(url, data = json.dumps(data), headers=headers)
+r = requests.post(url, data = json.dumps(data), headers = headers)
 print(r.content.decode(), "status: ", r.status_code) 
+
+exit()
+
 url = "http://localhost:5000/product/post/"
 data = {
     "name" : "Porção de Torresmo",
@@ -62,7 +65,7 @@ data = {
     },
     "categories" : ["comida", "tira gosto", "salgado", "fritura"],
     "prices" : {
-        boteco_paulo["_id"] : (1.0, [1.0, 1.1, 1.0, 1.0])
+        boteco_paulo["_id"] : (1.0, [(str(datetime.now()), 1.00), (str(datetime.now()), 1.00), (str(datetime.now()), 1.00), (str(datetime.now()), 1.00)])
     },
     "price_history" : [(str(datetime.now()), 1.00)],
     "reviews" : []
@@ -81,7 +84,7 @@ data = {
     },
     "categories" : ["lanche", "tradição mineira", "comida"],
     "prices" : {
-        padaria_joana["_id"] : (10.0, [10.0, 10.1, 10.0, 10.0])
+        padaria_joana["_id"] : (1.0, [(str(datetime.now()), 1.00), (str(datetime.now()), 1.00), (str(datetime.now()), 1.00), (str(datetime.now()), 1.00)])
     },
     "price_history" : [(str(datetime.now()), 10.00)],
     "reviews" : []
@@ -99,7 +102,7 @@ data = {
     },
     "categories" : ["lanche", "comida"],
     "prices" : {
-        padaria_joana["_id"] : (12.0, [12.0, 12.1, 12.0, 12.0])
+        padaria_joana["_id"] : (1.0, [(str(datetime.now()), 1.00), (str(datetime.now()), 1.00), (str(datetime.now()), 1.00), (str(datetime.now()), 1.00)])
     },
     "price_history" : [(str(datetime.now()), 12.00)],
     "reviews" : []
