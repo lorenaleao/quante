@@ -25,17 +25,19 @@ function Main({navigation}){
         >
           <Text style={styles.text}>CADASTRAR PRODUTO</Text>
         </TouchableOpacity>
-        <TouchableOpacity style={styles.box}
-          title="Perfil de Usuário"
-          onPress={() => navigation.navigate('Perfil')}
-        >
-          <Text style={styles.text}>PERFIL</Text>
-        </TouchableOpacity>
+
         <TouchableOpacity style={styles.box}
           title="Pesquisar Produto"
           onPress={() => navigation.navigate('Pesquisar')}
         >
           <Text style={styles.text}>PESQUISAR PRODUTO</Text>
+        </TouchableOpacity>
+
+        <TouchableOpacity style={styles.box}
+          title="Perfil de Usuário"
+          onPress={() => navigation.navigate('Perfil')}
+        >
+          <Text style={styles.text}>PERFIL</Text>
         </TouchableOpacity>
     </View>
     );
@@ -53,7 +55,7 @@ const styles = StyleSheet.create({
   },
   box:{
     width: '45%',
-    height: '30%',
+    height: '25%',
     backgroundColor: '#1e5bc6',
     justifyContent: 'center',
     alignItems: 'center',

@@ -11,6 +11,7 @@ import Login from './pages/Login'
 import CadastraUsuario from './pages/CadastraUsuario'
 import CadastraEstabelecimento from './pages/CadastraEstabelecimento'
 import Produto from './pages/Produto';
+import AtualizaPrecoProduto from './pages/AtualizaPrecoProduto';
 
 const Stack = createStackNavigator();
 
@@ -39,6 +40,7 @@ function Routes() {
         <Stack.Screen name="Perfil" component={PerfilUsuario} />
         <Stack.Screen name="Pesquisar" component={BuscaProduto} />
         <Stack.Screen name="Produto" component={Produto} />
+        <Stack.Screen name="Atualizar Preço" component={AtualizaPrecoProduto} />
         </Stack.Navigator>
       </NavigationContainer>
     );

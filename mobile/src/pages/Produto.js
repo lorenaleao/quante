@@ -2,12 +2,18 @@ import React, { useState } from 'react';
 import { Alert, StyleSheet, ScrollView, SafeAreaView, Text, Image, View, StatusBar, TouchableOpacity } from 'react-native';
 import {MaterialIcons} from '@expo/vector-icons';
 
+import AtualizaPrecoProduto from './AtualizaPrecoProduto';
+
 import api from '../services/api';
 
 function Produto({route, navigation}){
 
     const [produto, setProd] = useState({});
     const [reviews, setReview] = useState([]);
+
+    function goToAtualizaPrecoProduto () {
+        navigation.navigate("Atualizar Preço")
+    }
 
     async function getProduto(){/*
         const resp = await api.get('product/get/'+route.params.id, ).then((response) => {
@@ -63,7 +69,7 @@ function Produto({route, navigation}){
             <ScrollView contentContainerStyle={styles.containerListaPrecos} style={styles.listaPrecos} >
                 {JSON.stringify(produto) != JSON.stringify({}) && Object.keys(produto.prices).map((prop, key) => {
                     return (
-                    <TouchableOpacity key={key} style={styles.itemPrecos} >
+                    <TouchableOpacity key={key} style={styles.itemPrecos} onPress={() => goToAtualizaPrecoProduto()} >
                         <Text style={styles.textoMercado}>{prop}</Text>
                         <Text style={styles.textoPreco}>{produto.prices[prop]}</Text>
                     </TouchableOpacity>

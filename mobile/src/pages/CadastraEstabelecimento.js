@@ -7,7 +7,8 @@ function CadastraEstabelecimento({navigation}){
 
     const [establishmentName, setEstablishmentName] = useState('');
     const [cnpj, setCnpj] = useState('');
-    const [address, setAdress] = useState('');
+    const [city, setCity] = useState('');
+    const [state, setState] = useState('');
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
 
@@ -19,7 +20,10 @@ function CadastraEstabelecimento({navigation}){
         const response = await api.post('/company/post/', {
             name: establishmentName,
             cnpj,
-            address,
+            address: {
+                city,
+                state
+            },
             email,
             password,
             create_date: dateTime
@@ -33,7 +37,8 @@ function CadastraEstabelecimento({navigation}){
             )
             setEstablishmentName('')
             setCnpj('')
-            setAdress('')
+            setCity('')
+            setState('')
             setEmail('')
             setPassword('')
         })
@@ -65,12 +70,22 @@ function CadastraEstabelecimento({navigation}){
                 <View style={{ height: 10 }}></View>
                 <TextInput 
                 style={styles.defaultTextInput}
-                placeholder="Insira o endereço do estabelecimento"
+                placeholder="Insira a cidade do estabelecimento"
                 placeholderTextColor="#999"
                 autoCapitalize="words"
                 autoCorrect={false}
-                value={address}
-                onChangeText={setAdress}
+                value={city}
+                onChangeText={setCity}
+                />
+                <View style={{ height: 10 }}></View>
+                <TextInput 
+                style={styles.defaultTextInput}
+                placeholder="Insira o estado do estabelecimento"
+                placeholderTextColor="#999"
+                autoCapitalize="words"
+                autoCorrect={false}
+                value={state}
+                onChangeText={setState}
                 />
                 <View style={{ height: 10 }}></View>
                 <TextInput 
