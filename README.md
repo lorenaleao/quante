@@ -29,42 +29,42 @@ Será desenvolvido como um trabalho para a disciplina de [Engenharia de Software
 
 ### Histórias, tarefas for história e seus respectivos responsáveis
 
-- [ ] **Cadastrar um produto** 
-  - [ ] Criar tela do cadastro do produto - _Guilherme Miranda_
+- [x] **Cadastrar um produto** 
+  - [x] Criar tela do cadastro do produto - _Guilherme Miranda_
   - [x] Criar um método POST para inserção dos dados no banco - _Tomaz Gomes_
   - [x] Criar estrutura no banco para armazenar os dados do produto - _Lorena Leão_
   - [x] Criar método para cadastrar imagens no back-end - _Raphael Augusto_
 
-- [ ] **Cadastrar estabelecimento**
-  - [ ] Criar tela do cadastro do estabelecimento - _Guilherme Miranda_
+- [x] **Cadastrar estabelecimento**
+  - [x] Criar tela do cadastro do estabelecimento - _Guilherme Miranda_
   - [x] Criar um método POST para inserção dos dados no banco - _Raphael Augusto_
   - [x] Criar estrutura no banco para armazenar os dados do estabelecimento - _Lorena Leão_
 
-- [ ] **Fazer pesquisa na base de dados**
+- [x] **Fazer pesquisa na base de dados**
   - [x] Criar tela para pesquisa de produto - _Matheus Guilherme Veloso_
   - [x] Criar método GET para fazer pesquisa no banco de produto - _Tomaz Gomes_
   - [x] Criar método GET para fazer pesquisa de lojas - _Tomaz Gomes_
-  - [ ] Criar método GET para fazer pesquisa por categorias - _Tomaz Gomes_
-  - [ ] Criar métodos para ordenação na interface - _Matheus Guilherme Veloso_
-  - [ ] Criar métodos para filtros na interface - _Matheus Guilherme Veloso_
+  - [x] Criar método GET para fazer pesquisa por categorias - _Tomaz Gomes_
+  - [x] Criar métodos para ordenação na interface - _Matheus Guilherme Veloso_
+  - [x] Criar métodos para filtros na interface - _Matheus Guilherme Veloso_
 
   No backlog (tarefas a serem implementadas se sobrar tempo)
   - [ ] Filtrar pesquisa por Geolocalização
 
-- [ ] **Cadastrar-se no sistema**
-  - [ ] Criar tela de cadastro - _Guilherme Miranda_
+- [x] **Cadastrar-se no sistema**
+  - [x] Criar tela de cadastro - _Guilherme Miranda_
   - [x] Criar tela de exbir o perfil do usuário (essa tela pode ser editada e possui botão de exclusão) - _Matheus Guilherme Veloso_
   - [x] Criar tabela dos usuários - _Lorena Leão_
   - [x] Criar métodos CRUD para o usuário - _Raphael Augusto_
 
-- [ ] **Avaliar produto**
+- [x] **Avaliar produto**
   - [x] Criar tabela no banco que guarda as avaliações do produto - _Lorena Leão_
   - [x] Criar tela de exibição do produto com campo de avaliação - _Matheus Guilherme Veloso_
   - [x] Criar métodos CRUD - _Tomaz Gomes_
 
-- [ ] **Atualizar dados do produto**
+- [x] **Atualizar dados do produto**
   - [x] Criar estrutura para requisição de atualização no banco - _Lorena Leão_
-  - [ ] Criar uma tela para inserir a requisição de atualização do produto - _Guilherme Miranda_
+  - [x] Criar uma tela para inserir a requisição de atualização do produto - _Guilherme Miranda_
   - [x] Criar método que verifica se uma quantidade X de requisições foi feita, e após este número de requisições, o valor mais frequente se torna o valor oficial do produto. - _Raphael Augusto_
 
 - [ ] **Avaliar Estabelecimentos**
