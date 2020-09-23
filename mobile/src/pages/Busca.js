@@ -54,8 +54,8 @@ function BuscaProduto({navigation}){
                         <TouchableOpacity style={styles.itemProduto}  onPress={() => navigation.navigate('Produto', {id:prop._id})}>
                             <Image source={{uri: 'https://vivanosports.com.br/images/sem_foto.png'}} style={styles.fotoProduto} />
                             <Text>{prop.name}</Text>
-                            <Text>Preço Mín: {prop.prices[Object.keys(prop.prices)[0]][1][0]}</Text>
-                            <Text>Preço Max: {prop.prices[Object.keys(prop.prices)[0]][1][1]}</Text>
+                            {/* <Text>Preço Mín: {prop.prices[Object.keys(prop.prices)[0]][1][0]}</Text>
+                            <Text>Preço Max: {prop.prices[Object.keys(prop.prices)[0]][1][1]}</Text> */}
                         </TouchableOpacity>
                         );
                     })} 

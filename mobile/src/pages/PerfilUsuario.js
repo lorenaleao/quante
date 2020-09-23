@@ -13,7 +13,7 @@ function PerfilUsuario({route, navigation}){
 
   async function getUsuario(){
     console.log('ID:' + usrID);
-    const getBanco = await api.get('client/get/5f6a2f7dd2c784e8ef49ef5d',).then((resp) => {
+    const getBanco = await api.get('client/get/5f6aabe5f9ec3d3194677ab9',).then((resp) => {
         setUsr(resp.data)
     })
   }
