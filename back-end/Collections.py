@@ -22,13 +22,13 @@ class CollectionBase():
             collection = db_mongo["db-quante"][self.collection_name]
             ret = collection.insert_one(obj)
             obj["_id"] = ObjectId(ret.inserted_id)
-            return obj
+            return self.convert(obj)
 
     def get(self, _id):
         with mg.MongoClient(self.mongo_url) as db_mongo:
             collection = db_mongo["db-quante"][self.collection_name]
             obj = collection.find_one({"_id" : ObjectId(_id)})
-            return obj
+            return self.convert(obj)
 
     def get_by_name(self, name: str):
         with mg.MongoClient(self.mongo_url) as db_mongo:
@@ -52,6 +52,7 @@ class CollectionBase():
             return objs_list
 
     def put(self, obj):
+        obj = {k : v for k, v in self.convert(obj).__dict__.items() if v is not None}
         _id = obj.pop('_id', None)
         with mg.MongoClient(self.mongo_url) as db_mongo:
             collection = db_mongo["db-quante"][self.collection_name]
@@ -60,14 +61,14 @@ class CollectionBase():
                 obj["_id"] = _id
             else:
                 obj["_id"] = ret.upserted_id
-            return obj
+            return self.convert(obj)
 
     def delete(self, _id):
         obj = self.get(_id)
         with mg.MongoClient(self.mongo_url) as db_mongo:
             collection = db_mongo["db-quante"][self.collection_name]
             collection.delete_one({"_id" : ObjectId(_id)})
-            return obj
+            return self.convert(obj)
      
      
 class ClientCollection(CollectionBase):
@@ -130,7 +131,8 @@ class ClientCollection(CollectionBase):
             collection = db_mongo["db-quante"][self.collection_name]
             obj = collection.find_one({"email" : email})
             return self.convert(obj)
-          
+
+
 class CompanyCollection(CollectionBase):
     def __init__(self):
         super().__init__(orm.Company)
@@ -272,6 +274,7 @@ class ProductCollection(CollectionBase):
                     ('validationLevel', 'moderate')])
 
             db_mongo["db-quante"].command(cmd)
+
 
 class ReviewCollection(CollectionBase):
     def __init__(self):
