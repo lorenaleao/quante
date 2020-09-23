@@ -3,25 +3,18 @@ import {Image, View, ScrollView, SafeAreaView, Text, TextInput, TouchableOpacity
 import {MaterialIcons} from '@expo/vector-icons'
 import { set } from 'react-native-reanimated';
 
+import api from '../services/api';
+
 function BuscaProduto({navigation}){
     const [produtos, setProd] = useState([]);
     const [textoBusca, setTextobusca] = useState('');
     const [selectedValue, setSelectedValue] = useState("java");
 
     async function procuraNoBanco(){
-        //const response = await api.get('', {params: {textoBusca}})
-        const response = {
-            data:[
-                {id: 0, name:'Yakult', priceMin: 'R$7,90', priceMax:'R$11,49' ,pic:'https://api.tendaatacado.com.br/fotos/1209.jpg'},
-                {id: 1, name:'Yakult Desnatado', priceMin: 'R$ 10,29', priceMax:'R$12,89', pic:'https://static.carrefour.com.br/medias/sys_master/images/images/h8b/hb0/h00/h00/9458275549214.jpg'},
-                {id: 2, name:'Yakult', priceMin: 'R$7,90', priceMax:'R$11,49' ,pic:'https://api.tendaatacado.com.br/fotos/1209.jpg'},
-                {id: 3, name:'Yakult Desnatado', priceMin: 'R$ 10,29', priceMax:'R$12,89', pic:'https://static.carrefour.com.br/medias/sys_master/images/images/h8b/hb0/h00/h00/9458275549214.jpg'},
-                {id: 4, name:'Yakult', priceMin: 'R$7,90', priceMax:'R$11,49' ,pic:'https://api.tendaatacado.com.br/fotos/1209.jpg'},
-                {id: 5, name:'Yakult Desnatado', priceMin: 'R$ 10,29', priceMax:'R$12,89', pic:'https://static.carrefour.com.br/medias/sys_master/images/images/h8b/hb0/h00/h00/9458275549214.jpg'},
-            ]
-        }
-        setProd(response.data);
-        console.log("Deu o response");
+
+        const resp = await api.get('product/get/substr/'+textoBusca,).then((response) => {
+            setProd(response.data)
+        })
     }
 
     return (
@@ -55,13 +48,14 @@ function BuscaProduto({navigation}){
             </View>
             <SafeAreaView>
                 <ScrollView contentContainerStyle={styles.containerListaProdutos} style={styles.listaProdutos} >
-                    {produtos.map((prop) => {
+                    {produtos != [] && produtos.map((prop, key) => {
+                        console.log(prop);
                         return (
-                        <TouchableOpacity key={prop.id} style={styles.itemProduto}  onPress={() => navigation.navigate('Produto', {id:prop.id})}>
-                            <Image source={{uri: prop.pic}} style={styles.fotoProduto} />
+                        <TouchableOpacity style={styles.itemProduto}  onPress={() => navigation.navigate('Produto', {id:prop._id})}>
+                            <Image source={{uri: 'https://vivanosports.com.br/images/sem_foto.png'}} style={styles.fotoProduto} />
                             <Text>{prop.name}</Text>
-                            <Text>Preço Mín: {prop.priceMin}</Text>
-                            <Text>Preço Max: {prop.priceMax}</Text>
+                            <Text>Preço Mín: {prop.prices[Object.keys(prop.prices)[0]][1][0]}</Text>
+                            <Text>Preço Max: {prop.prices[Object.keys(prop.prices)[0]][1][1]}</Text>
                         </TouchableOpacity>
                         );
                     })} 
