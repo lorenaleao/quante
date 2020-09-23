@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from 'react';
-import {View, Text, TextInput, Button, StyleSheet, Picker} from 'react-native';
+import {View, Text, TextInput, Button, StyleSheet, Picker, Alert} from 'react-native';
 
 import api from '../services/api';
 
-function CadastraProduto(){
+function CadastraProduto({navigation}){
 
     const [companies, setCompanies] = useState([]);
     const [selectedValue, setSelectedValue] = useState([]);
@@ -20,18 +20,25 @@ function CadastraProduto(){
         let dateTime = date+' '+time
         const response = await api.post('/product/post/', {
             name: productName,
-            image: null,
             description, 
             spec : {
 
             },
             categories: [],
             prices: {
-                companyId: (productPrice, [1.0, 1.1, 1.0, 1.0])
+                companyId: [productPrice, [["2020-9-22 18:35:58", 1.5], ["2020-9-22 17:20:31", 1.8]]]
             },
             price_history : [(dateTime, productPrice)],
             reviews : []
 
+        }).then((response) => {
+            Alert.alert(
+                "Sucesso!",
+                "Produto cadastrado com sucesso!",
+                [
+                { text: "OK", onPress: () => navigation.navigate('Quanté?') }
+                ]
+            )
         })
     }
 
