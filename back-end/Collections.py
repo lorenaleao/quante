@@ -107,6 +107,14 @@ class ClientCollection(CollectionBase):
                         "password": {
                         "bsonType": "string",
                         "description": "must be a string and is required"
+                        },
+                        "create_date": {
+                        "bsonType": "string",
+                        "description": "must be a string and is not required"
+                        },
+                        "perfil_img": {
+                        "bsonType": "string",
+                        "description": "must be a string and is not required"
                         }
                     }
                 }
@@ -184,6 +192,10 @@ class CompanyCollection(CollectionBase):
                         "password": {
                         "bsonType": "string",
                         "description": "must be a string and is required"
+                        },
+                        "create_date": {
+                        "bsonType": "string",
+                        "description": "must be a string and is not required"
                         }
                     }
                 }
@@ -215,7 +227,7 @@ class ProductCollection(CollectionBase):
             vexpr = {
                 "$jsonSchema": {
                     "bsonType": "object",
-                    "required": [ "name", "prices" ],
+                    "required": [ "name" ],
                     "properties": {
                         "name": {
                         "bsonType": "string",
@@ -242,7 +254,8 @@ class ProductCollection(CollectionBase):
                         "bsonType": "array"
                         },
                         "prices": {
-                        "bsonType": "object"
+                        "bsonType": "object",
+                        "description": "must be an object if the field exists"
                         },
                         "price_history": {
                         "bsonType": "array"
